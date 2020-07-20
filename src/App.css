@@ -42,6 +42,10 @@ td {
   background-color: #C0562A;
 }
 
+.ButtonAction:focus {
+  outline: none;
+}
+
 /* FAS ICONS */
 
 .fas {

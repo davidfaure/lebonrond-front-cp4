@@ -1,13 +1,55 @@
 .Offer {
   display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .OfferItem {
   display: flex;
   flex-direction: column;
+  box-shadow: 0px 3px 10px grey;
+  border-radius: 5px;
 }
 
 .Offer-Img {
-  width: 200px;
-  height: 200px;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.Offer-Img img {
+max-width: 100%;
+min-height: 300px;
+-webkit-transform: scale(1);
+transform: scale(1);
+-webkit-transition: 0.3s ease-in-out;
+transition: transform 0.3s ease-in-out;
+-moz-transform: scale(1);
+-ms-transform: scale(1);
+-o-transform: scale(1);
+-moz-transition:0.3s ease-in-out;
+-ms-transition:0.3s ease-in-out;
+-o-transition:0.3s ease-in-out;
+}
+
+.Offer-Img img:hover {
+  transition: transform 0.3 ease-in-out;
+  transform:scale(1.1);
+  -moz-transform:scale(1.1);
+  -ms-transform:scale(1.1);
+  -o-transform:scale(1.1);
+}
+
+.Offer-btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.Offer-price {
+  color: #FF6E15;
+  margin: 10px 0px;
+}
+
+.card-text {
+  font-weight: 200;
 }
