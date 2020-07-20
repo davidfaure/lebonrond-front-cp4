@@ -1,0 +1,13 @@
+.Offer {
+  display: flex;
+}
+
+.OfferItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.Offer-Img {
+  width: 200px;
+  height: 200px;
+}
