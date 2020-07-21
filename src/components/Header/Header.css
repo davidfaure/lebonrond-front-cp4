@@ -22,4 +22,10 @@
 
 .Admin-name {
   margin-right: 20px;
+  align-items: center;
+}
+
+.Admin-board {
+  justify-content: center;
+  margin-top: 15px;
 }

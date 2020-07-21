@@ -6,6 +6,14 @@
   border-bottom-right-radius: 50% 33%;
 }
 
+.curved h1 {
+  position: absolute;
+  top:30%;
+  left: 40%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .Container-LastOffer {
   display: flex;
   justify-content: center;

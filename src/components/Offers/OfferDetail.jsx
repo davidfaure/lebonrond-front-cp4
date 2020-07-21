@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 import Header from '../Header/Header';
 import axios from 'axios';
 import './Offers.css';
-import { getQueriesForElement } from '@testing-library/react';
+import { MapContainer } from '../Map/Map';
 
 const OfferDetail = ({ match }) => {
   const { id } = match.params;
   const [offer, SetOffer] = useState({});
   const [user, setUser] = useState([]);
+  const [unlike, setUnlike] = useState('far fa-heart unlike')
   const [category, setCategory] = useState([]);
 
   const getOffer = () => {
@@ -44,6 +45,10 @@ const OfferDetail = ({ match }) => {
     getCategory();
   }, [])
 
+  const Likeit = () => {
+    setUnlike('far fa-heart like')
+  }
+
   console.log(offer)
 
   return(
@@ -54,31 +59,46 @@ const OfferDetail = ({ match }) => {
         <img src={offer.photos} alt={offer.photos} />
       </div>
       <div className="OfferDetail-Title">
-        <h1>{offer.name}</h1>
-        <p>{offer.prix}</p>
-      </div>
+        <div className="Offer-Like">
+          <h1>{offer.name}</h1>
+          <div className="heart-div" onClick={Likeit}>
+            <span className={unlike} />
+          </div>
+        </div>
+        <p className="prix">{offer.prix} €</p>
       <hr/>
+      </div>
       <div className="OfferDetail-User">
-      <h1>Vendu par :</h1>
+      <h2>Vendu par :</h2>
         <h3>{CategoryUserFirstName} {CategoryUserLastName}</h3>
-      </div>
       <hr/>
-      <div>
+      </div>
         <h2>Critères</h2>
-        <p>Catégorie : {CategoryOffer}</p>
-        <p>État : {offer.etat}</p>
+      <div className="OfferCritere">
+        <div className="OfferCatEtat">
+          <span className="fas fa-clipboard-list"/>
+          <p>Catégorie : <br/>{CategoryOffer}</p>
+        </div>
+        <div className="OfferCatEtat">
+          <span className="fas fa-clipboard-list"/>
+          <p>État : <br/>{offer.etat}</p>
+        </div>
       </div>
-      <hr/>
+      <div>
+        <hr/>
+      </div>
       <div>
         <h2>Description</h2>
         <p>{offer.description}</p>
-      </div>
       <hr/>
+      </div>
       <div>
         <h2>Localisation</h2>
         <p>{offer.address}, {offer.cp}, {offer.city}<br/>{offer.region}</p>
       </div>
-
+      <div>
+        <MapContainer />
+      </div>
     </section>
     </>
   );

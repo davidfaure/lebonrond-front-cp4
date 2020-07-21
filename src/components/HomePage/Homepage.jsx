@@ -1,7 +1,7 @@
 import React from 'react';
 import './HomePage.css';
-import Header from '../Header';
-import OffersList from '../../Offers/OffersList';
+import Header from '../Header/Header';
+import OffersList from '../Offers/OffersList';
 
 const HomePage = () => {
   return(
@@ -9,10 +9,12 @@ const HomePage = () => {
       <Header />
       <section>
       <div className="curved">
-      <div className="Container-LastOffer">
+      <div className="LastOffer">
         <h1>Les dernières annonces</h1>
-          <OffersList />
       </div>
+      </div>
+      <div className="Container-LastOffer">
+          <OffersList />
       </div>
       </section>
     </>
