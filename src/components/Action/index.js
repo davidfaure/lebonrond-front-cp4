@@ -5,4 +5,11 @@ const fetchResult = (result) => {
   };
 };
 
+export const fetchCategorySearch = (result) => {
+  return {
+    type: 'FETCH_CAT_RESULT',
+    result,
+  }
+}
+
 export default fetchResult;

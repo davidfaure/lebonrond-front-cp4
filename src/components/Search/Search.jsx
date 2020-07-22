@@ -69,7 +69,7 @@ const Search = ({ dispatch }) => {
                   name="region"
                   onChange={e => setRegion(e.target.value)}
                 >
-                  <option>--- Choisr une région ---</option>
+                  <option>--- Choisir une région ---</option>
                   <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
                   <option value="Occitanie">Occitanie</option>
                   <option value="Ile-de-France">Ile-de-France</option>
