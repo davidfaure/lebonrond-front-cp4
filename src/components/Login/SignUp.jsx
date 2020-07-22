@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const SignUp = (props) => {
   const [show, setShow] = useState(false);
+  const [successShow, setSuccessShow] = useState(false)
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -41,7 +42,7 @@ const SignUp = (props) => {
       } else {
         axios.post(url, userInput)
           .then((res) => console.log(res))
-          .then(() => props.history.push('/login'))
+          .then(() => setSuccessShow(true))
       }
   }
 
@@ -165,10 +166,6 @@ const SignUp = (props) => {
             >Créer mon compte</button>
           </div>
         </Form>
-        <p className="text-center mt-4 LoginLabels">
-          Mot de passe perdu ?{' '}
-          <a href="mailto:support@yopmail.com">Contactez-nous</a>
-        </p>
       </div>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
@@ -179,6 +176,19 @@ const SignUp = (props) => {
           <Button variant="danger" onClick={() => setShow(false)}>
             Réessayer
           </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal show={successShow} onHide={() => setSuccessShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Lebonrond</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Votre compte a été crée avec succès</Modal.Body>
+        <Modal.Footer>
+        <Link to='/login'>
+          <Button className="ButtonAction Action" onClick={() => setSuccessShow(false)}>
+            Me connecter
+          </Button>
+        </Link>
         </Modal.Footer>
       </Modal>
     </section>

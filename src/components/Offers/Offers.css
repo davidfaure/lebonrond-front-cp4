@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  margin: 40px;
 }
 
 .OfferItem {
@@ -9,6 +10,7 @@
   flex-direction: column;
   box-shadow: 0px 3px 10px grey;
   border-radius: 5px;
+  margin: 20px;
 }
 
 .Offer-Img {
@@ -78,6 +80,7 @@ transition: transform 0.3s ease-in-out;
 
 .prix {
   color: #FF6E15;
+  font-size: 1.6rem !important;
 }
 
 .OfferDetail-Photo {

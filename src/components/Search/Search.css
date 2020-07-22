@@ -1,0 +1,91 @@
+.Form-Search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  position: absolute;
+  margin: 50px;
+  width: 55%;
+  left: 22%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+}
+
+.Form-Search form {
+  width: 60%;
+}
+
+.Search-Btn {
+  display: flex;
+  justify-content: center;
+}
+
+.Form-Search h2{
+  margin-bottom: 10px;
+}
+
+.Container-ResultSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background: #fff;
+}
+
+.Container-ResultSearch span {
+  font-weight: 200;
+}
+
+.ResultSearch {
+  margin: 20px 0px 40px 0px;
+}
+
+.Hidden {
+  display: none;
+}
+
+.Search-Offer-Detail {
+  display: flex;
+  margin: 20px;
+  box-shadow: 1px 1px 8px 1px #e6ebef;
+  border-radius: .5rem;
+}
+
+.Search-Offer-Img {
+  width: 30%;
+}
+
+.Search-Offer-Img img {
+max-width: 100%;
+border-top-left-radius: .5rem;
+border-bottom-left-radius: .5rem;
+}
+
+.Search-Offer-Info {
+  margin: 30px 0px 0px 20px;
+}
+
+.Search-Offer-Info h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.Search-Offer-Info p {
+  font-weight: 200;
+}
+
+.Search-Offer-Price {
+  font-weight: 400 !important;
+  color: #FF6E15;
+  margin-bottom: 30px;
+}
+
+.Search-Offer-GeneralInfo p {
+  margin-bottom: 0px;
+}

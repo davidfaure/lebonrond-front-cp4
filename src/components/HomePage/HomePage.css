@@ -4,6 +4,7 @@
   height: 20vh;
   border-bottom-left-radius: 50% 33%;
   border-bottom-right-radius: 50% 33%;
+  margin-bottom: 50px;
 }
 
 .curved h1 {
@@ -17,11 +18,30 @@
 .Container-LastOffer {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background: #fff;
 }
 
-.Container-LastOffer h1 {
+
+.Container-Search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background: #fff;
+}
+
+.LastOffer h1 {
 text-align: center;
-margin-top: 50px;
-color: #fff;
+margin-top: 10px;
+/* color: #fff; */
 }
