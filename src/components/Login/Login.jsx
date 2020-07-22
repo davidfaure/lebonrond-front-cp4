@@ -4,7 +4,7 @@ import { Form, Modal, Button } from 'react-bootstrap';
 import './Login.css';
 import '../../App.css';
 import { Link, Redirect } from 'react-router-dom';
-import { authContext } from '../contexts/AuthContext';
+import { authContext } from '../Contexts/AuthContext';
 
 const Login = (props) => {
 const { setAuthData, auth } = useContext(authContext);

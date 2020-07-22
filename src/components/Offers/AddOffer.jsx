@@ -2,7 +2,7 @@ import React, {useReducer, useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import { Form, Modal, Col, Row, Button } from 'react-bootstrap';
 import Header from '../Header/Header';
-import { authContext } from '../contexts/AuthContext';
+import { authContext } from '../Contexts/AuthContext';
 
 const AddOffer = () => {
   const { auth } = useContext(authContext);
