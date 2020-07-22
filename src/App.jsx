@@ -10,6 +10,7 @@ import AddOffer from './components/Offers/AddOffer';
 import SignUp from './components/Login/SignUp';
 import AuthProvider from './components/Contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
+import Profile from './components/Profile/Profile';
 
 // const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -21,8 +22,9 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/offer/:id" component={OfferDetail} />
         <Route path='/login' component={Login} />
-        <PrivateRoute path='/add-offer' component={AddOffer} />
         <Route path='/signup' component={SignUp} />
+        <PrivateRoute path='/add-offer' component={AddOffer} />
+        <PrivateRoute path='/profile' component={Profile} />
       </Switch>
     </AuthProvider>
     </>

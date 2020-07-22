@@ -47,12 +47,51 @@ td {
   border-radius: 5px;
 }
 
+.ButtonOffer {
+  text-align: center;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
 .Action {
   background-color: #FF6E15;
 }
 .Action:hover {
   background-color: #C0562A;
 }
+
+.OfferBtn {
+  background-color: #007BFF;
+}
+.OfferBtn:hover {
+  background-color: #0068D9;
+}
+
+.FavoriteBtn {
+  background-color: #29A745;
+}
+.FavoriteBtn:hover {
+  background-color: #228838;
+}
+
+.ProfileBtn {
+  background-color: #FFC108;
+}
+.ProfileBtn:hover {
+  background-color: #E0A800
+}
+
+.ParamsBtn {
+  background-color: #DC3545;
+}
+
+.ParamsBtn:hover {
+  background-color: #C82333;
+}
+
+
 
 .ButtonAction:focus {
   outline: none;
@@ -82,4 +121,8 @@ a .fa-pen:hover {
 
 .fa-power-off:hover {
   color: #ff5733;
+}
+
+.fas:focus {
+  outline: none;
 }
