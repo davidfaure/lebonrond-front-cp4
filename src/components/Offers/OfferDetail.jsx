@@ -101,7 +101,7 @@ const OfferDetail = ({ match }) => {
               <span className={unlike} />
             </div>
           </div>
-          <p className="prix">{offer.prix} €</p>
+          <h3 className="prix">{offer.prix} €</h3>
         <hr/>
         </div>
         <div className="OfferDetail-User">

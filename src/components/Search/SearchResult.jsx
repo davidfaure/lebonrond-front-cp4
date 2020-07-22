@@ -1,0 +1,61 @@
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import SearchDetail from './SearchDetail';
+
+const SearchResult = ({ search }) => {
+
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    getCategory();
+  }, [search]);
+
+  const getCategory = () => {
+    const url = 'http://localhost:3000/api/categories/'
+    axios.get(url)
+    .then((response) => response.data)
+    .then((data) => setCategory(data))
+    .catch();
+  }
+
+  console.log(search)
+
+  return(
+    <section className={search.searchClicked ? "ResultSearch" : "ResultSearch Hidden"}>
+      <div className="Container-ResultSearch">
+        <h1>Resultats de votre recherche </h1>
+        {
+          search.search.length !== 0 ? (
+            <>
+            <p>Catégorie : <span>{category.filter(element => element.id === search.search[0].category_id).map(element => element.name)[0]}</span> <br/> Region: <span>{search.search[0].region}</span></p>
+            <div className="ResultSearch">
+              {search.search.map((offers) => (
+                <SearchDetail 
+                  key={offers.id}
+                  index={offers.id}
+                  category_id={offers.category_id}
+                  city={offers.city}
+                  cp={offers.cp}
+                  name={offers.name}
+                  photos={offers.photos}
+                  prix={offers.prix}
+                  etat={offers.etat}
+                />
+              ))
+              }
+            </div>   
+            </>        
+          ) : (
+            <p> Oups, il n'y a aucunes annonces avec cette region et/ou cette catégorie </p>
+          )
+        }
+      </div>
+    </section>
+  );
+};
+
+const mapStateToProps = (state) => ({
+  search : state.fetchResult,
+})
+export default connect(mapStateToProps)(SearchResult);

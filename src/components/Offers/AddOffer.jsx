@@ -9,6 +9,7 @@ const AddOffer = () => {
   const { auth } = useContext(authContext);
   const [show, setShow] = useState(false);
   const [successShow, setSuccessShow] = useState(false);
+  const [category, setCategory] = useState([]);
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -47,8 +48,6 @@ const getUserInfo = () => {
       ));
 }
 
-  const [category, setCategory] = useState([]);
-
   useEffect(() => {
     getCategory();
     getUserInfo();
@@ -64,7 +63,6 @@ const getUserInfo = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setUserInput({ [name]: value });
   };
 
@@ -216,7 +214,7 @@ const getUserInfo = () => {
                 onChange={handleChange}
                 value={userInput.region}
               >
-              <option>--- Choisr une région </option>
+              <option>--- Choisr une région ---</option>
               <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
               <option value="Occitanie">Occitanie</option>
               <option value="Ile-de-France">Ile-de-France</option>
@@ -259,7 +257,7 @@ const getUserInfo = () => {
           </Modal.Header>
           <Modal.Body>Votre annonce a bien été ajoutée</Modal.Body>
           <Modal.Footer>
-          <Link to='/login'>
+          <Link to='/'>
             <Button className="ButtonAction Action" onClick={() => setSuccessShow(false)}>
               Valider
             </Button>
