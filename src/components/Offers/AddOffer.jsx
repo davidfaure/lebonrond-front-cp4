@@ -89,18 +89,38 @@ const getUserInfo = () => {
         .then((res) => res.data && setSuccessShow(true))
   };
 
+  const [opacForm1, SetOpacForm1] = useState('Opac-Form1-true')
+  const [opacForm2, SetOpacForm2] = useState('Opac-Form1-true')
+  const [opacForm3, SetOpacForm3] = useState('Opac-Form1-true')
+  const [hideButton1, SetHideButton1] = useState('ContinueButton')
+  const [hideButton2, SetHideButton2] = useState('ContinueButton')
+  const [hideButton3, SetHideButton3] = useState('ContinueButton')
+  const Opacity1 = () => {
+    SetOpacForm1('Opac-Form1-false')
+    SetHideButton1('ContinueButton-Hidden')
+  }
+
+  const Opacity2 = () => {
+    SetOpacForm2('Opac-Form1-false')
+    SetHideButton2('ContinueButton-Hidden')
+  }
+
+  const Opacity3 = () => {
+    SetOpacForm3('Opac-Form1-false')
+    SetHideButton3('ContinueButton-Hidden')
+  }
+
   return(
     <>
     <Header />
-    <section>
-      <div className="curved">
-        <h1>Ajouter une annonce</h1>
-      </div>
+    <section className="AddOffer-Container">
       <div className="AddOfferForm">
+        <h1>Déposer une annonce</h1>
         <Form onSubmit={handleSubmit}>
-          <Row>
           <Col>
-            <Form.Group controlId="name">
+            <div>
+              <h2 className="H2-first">Ajoutons l'essentiel :</h2>
+              <Form.Group controlId="name">
                 <Form.Label className="LoginLabels">Titre de l'annonce</Form.Label>
                 <Form.Control
                   name="name"
@@ -127,55 +147,71 @@ const getUserInfo = () => {
                 }
                 </Form.Control>
               </Form.Group>
-              <Form.Group controlId="etat">
-                <Form.Label className="LoginLabels">État</Form.Label>
+              <div className={hideButton1}>
+                <button className="ButtonAction OfferBtn" onClick={Opacity1} type="button" disabled={!userInput.name}>Continuer</button>
+              </div>
+            </div>
+              <div className={opacForm1}>
+                <h2>Définissons votre offre :</h2>
+                <Form.Group controlId="etat">
+                  <Form.Label className="LoginLabels">État</Form.Label>
+                  <Form.Control
+                    name="etat"
+                    as="select"
+                    value={userInput.etat}
+                    onChange={handleChange}
+                  >
+                  <option>--- État du produit ---</option>
+                  <option value="État neuf">État neuf</option>
+                  <option value="Très bon état">Très bon état</option>
+                  <option value="Bon état">Bon état</option>
+                  <option value="État satisfaisant">État satisfaisant</option>
+                  <option value="Pour pièces">Pour pièces</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="prix">
+                  <Form.Label className="LoginLabels">Prix</Form.Label>
+                  <Form.Control
+                    name="prix"
+                    type="number"
+                    placeholder="Entrez un prix"
+                    value={userInput.prix}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <div className={hideButton2}>
+                  <button className="ButtonAction OfferBtn" onClick={Opacity2} type="button" disabled={!userInput.prix}>Continuer</button>
+                </div>
+              </div>
+              <div className={opacForm2}>
+              <h2>Allons plus loin :</h2>
+                <Form.Group controlId="photos">
+                  <Form.Label className="LoginLabels">Photo</Form.Label>
+                  <Form.Control
+                    name="photos"
+                    type="text"
+                    placeholder="Entrez une url"
+                    value={userInput.photos}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group controlId="description">
+                <Form.Label className="LoginLabels">Description</Form.Label>
                 <Form.Control
-                  name="etat"
-                  as="select"
-                  value={userInput.etat}
-                  onChange={handleChange}
-                >
-                <option>--- État du produit ---</option>
-                <option value="État neuf">État neuf</option>
-                <option value="Très bon état">Très bon état</option>
-                <option value="Bon état">Bon état</option>
-                <option value="État satisfaisant">État satisfaisant</option>
-                <option value="Pour pièces">Pour pièces</option>
-                </Form.Control>
-              </Form.Group>
-              <Form.Group controlId="photos">
-                <Form.Label className="LoginLabels">Photo</Form.Label>
-                <Form.Control
-                  name="photos"
-                  type="text"
-                  placeholder="Entrez une url"
-                  value={userInput.photos}
+                  name="description"
+                  as="textarea"
+                  rows="8"
+                  placeholder="Entrez votre description"
+                  value={userInput.description}
                   onChange={handleChange}
                 />
               </Form.Group>
-              <Form.Group controlId="prix">
-                <Form.Label className="LoginLabels">Prix</Form.Label>
-                <Form.Control
-                  name="prix"
-                  type="number"
-                  placeholder="Entrez un prix"
-                  value={userInput.prix}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group controlId="description">
-              <Form.Label className="LoginLabels">Description</Form.Label>
-              <Form.Control
-                name="description"
-                as="textarea"
-                rows="8"
-                placeholder="Entrez votre description"
-                value={userInput.description}
-                onChange={handleChange}
-              />
-            </Form.Group>
-            </Col>
-            <Col>
+              <div className={hideButton3}>
+                  <button className="ButtonAction OfferBtn" onClick={Opacity3} type="button" disabled={!userInput.description}>Continuer</button>
+                </div>
+            </div>
+            <div className={opacForm3}>
+            <h2>Localisons le tout:</h2>
             <Form.Group controlId="address">
               <Form.Label className="LoginLabels">Adresse</Form.Label>
               <Form.Control
@@ -230,14 +266,14 @@ const getUserInfo = () => {
               <option value="Corse">Corse</option>
               </Form.Control>
             </Form.Group>
-            </Col>
-            </Row>
             <div className="text-center signupButton">
               <button
                 className="ButtonAction Action"
                 type="submit"
               >Ajouter</button>
             </div>
+            </div>
+            </Col>
           </Form>
         </div>
         <Modal show={show} onHide={() => setShow(false)}>

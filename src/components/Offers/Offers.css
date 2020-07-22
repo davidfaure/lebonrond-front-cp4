@@ -8,8 +8,8 @@
 .OfferItem {
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 3px 10px grey;
-  border-radius: 5px;
+  box-shadow: 1px 1px 8px 1px #e6ebef;
+  border-radius: 1.5rem;
   margin: 20px;
 }
 
@@ -59,9 +59,15 @@ transition: transform 0.3s ease-in-out;
 .AddOfferForm {
   background: #fff;
   border-radius: 10px;
-  width: 80%;
+  width: 60%;
   margin: auto;
   padding: 30px;
+}
+
+.AddOfferForm h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #FF6E15;
 }
 
 .Container-OfferDetail {
@@ -96,7 +102,8 @@ transition: transform 0.3s ease-in-out;
   min-width: 800px;
 }
 
-.OfferDetail-Title {
+.OfferDetail-Title,
+.AddOffer-Container {
   margin-top: 40px;
 }
 
@@ -166,6 +173,30 @@ transition: transform 0.3s ease-in-out;
   margin: 20px 0px 5px 0px;
 }
 
+.ContinueButton {
+  display: flex;
+  justify-content: center;
+}
+
+.ContinueButton-Hidden {
+  display: none;
+}
+
 .OfferConBtn {
   margin-right: 20px;
 }
+
+.Opac-Form1-true {
+  opacity: .2;
+}
+
+.Opac-Form1-true h2,
+.Opac-Form1-false h2,
+.H2-first {
+  margin: 40px 0px;
+}
+
+.Opac-Form1-false {
+  opacity: 1;
+}
+

@@ -69,6 +69,12 @@ td {
   background-color: #0068D9;
 }
 
+.OfferBtn:disabled,
+.OfferBtn[disabled] {
+  background-color: #666666;
+  cursor: not-allowed;
+}
+
 .FavoriteBtn {
   background-color: #29A745;
 }
