@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../App.css';
 import './Header.css';
-import { authContext } from '../contexts/AuthContext';
+import { authContext } from '../Contexts/AuthContext';
 
 const Header = () => {
   const {setAuthData, auth } = useContext(authContext);

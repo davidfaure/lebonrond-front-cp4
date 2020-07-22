@@ -8,7 +8,7 @@ import HomePage from './components/HomePage/Homepage';
 import OfferDetail from './components/Offers/OfferDetail';
 import AddOffer from './components/Offers/AddOffer';
 import SignUp from './components/Login/SignUp';
-import AuthProvider from './components/contexts/AuthContext';
+import AuthProvider from './components/Contexts/AuthContext';
 import PrivateRoute from './components/PrivateRoute';
 
 // const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

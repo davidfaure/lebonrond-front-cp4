@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
-import { authContext } from './contexts/AuthContext';
+import { authContext } from './Contexts/AuthContext';
 import '../App.css';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

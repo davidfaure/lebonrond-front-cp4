@@ -72,6 +72,10 @@ transition: transform 0.3s ease-in-out;
   flex-direction: column;
 }
 
+.OfferDetail {
+  margin: 50px; 
+}
+
 .prix {
   color: #FF6E15;
 }

@@ -54,50 +54,52 @@ const OfferDetail = ({ match }) => {
   return(
     <>
     <Header />
-    <section className="Container-OfferDetail">
-      <div className="OfferDetail-Photo">
-        <img src={offer.photos} alt={offer.photos} />
-      </div>
-      <div className="OfferDetail-Title">
-        <div className="Offer-Like">
-          <h1>{offer.name}</h1>
-          <div className="heart-div" onClick={Likeit}>
-            <span className={unlike} />
+    <section className="OfferDetail">
+      <div className="Container-OfferDetail">
+        <div className="OfferDetail-Photo">
+          <img src={offer.photos} alt={offer.photos} />
+        </div>
+        <div className="OfferDetail-Title">
+          <div className="Offer-Like">
+            <h1>{offer.name}</h1>
+            <div className="heart-div" onClick={Likeit}>
+              <span className={unlike} />
+            </div>
+          </div>
+          <p className="prix">{offer.prix} €</p>
+        <hr/>
+        </div>
+        <div className="OfferDetail-User">
+        <h2>Vendu par :</h2>
+          <h3>{CategoryUserFirstName} {CategoryUserLastName}</h3>
+        <hr/>
+        </div>
+          <h2>Critères</h2>
+        <div className="OfferCritere">
+          <div className="OfferCatEtat">
+            <span className="fas fa-clipboard-list"/>
+            <p>Catégorie : <br/>{CategoryOffer}</p>
+          </div>
+          <div className="OfferCatEtat">
+            <span className="fas fa-clipboard-list"/>
+            <p>État : <br/>{offer.etat}</p>
           </div>
         </div>
-        <p className="prix">{offer.prix} €</p>
-      <hr/>
-      </div>
-      <div className="OfferDetail-User">
-      <h2>Vendu par :</h2>
-        <h3>{CategoryUserFirstName} {CategoryUserLastName}</h3>
-      <hr/>
-      </div>
-        <h2>Critères</h2>
-      <div className="OfferCritere">
-        <div className="OfferCatEtat">
-          <span className="fas fa-clipboard-list"/>
-          <p>Catégorie : <br/>{CategoryOffer}</p>
+        <div>
+          <hr/>
         </div>
-        <div className="OfferCatEtat">
-          <span className="fas fa-clipboard-list"/>
-          <p>État : <br/>{offer.etat}</p>
-        </div>
-      </div>
-      <div>
+        <div>
+          <h2>Description</h2>
+          <p>{offer.description}</p>
         <hr/>
-      </div>
-      <div>
-        <h2>Description</h2>
-        <p>{offer.description}</p>
-      <hr/>
-      </div>
-      <div>
-        <h2>Localisation</h2>
-        <p>{offer.address}, {offer.cp}, {offer.city}<br/>{offer.region}</p>
-      </div>
-      <div>
-        <MapContainer />
+        </div>
+        <div>
+          <h2>Localisation</h2>
+          <p>{offer.address}, {offer.cp}, {offer.city}<br/>{offer.region}</p>
+        </div>
+        <div>
+          <MapContainer />
+        </div>
       </div>
     </section>
     </>
