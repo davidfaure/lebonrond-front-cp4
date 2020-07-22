@@ -1,15 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext } from 'react';
+import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import axios from 'axios';
 import './Offers.css';
-import { MapContainer } from '../Map/Map';
+import Map from '../Map/Map';
+import { authContext } from '../Contexts/AuthContext';
+
 
 const OfferDetail = ({ match }) => {
+  const {setAuthData, auth } = useContext(authContext);
   const { id } = match.params;
   const [offer, SetOffer] = useState({});
   const [user, setUser] = useState([]);
   const [unlike, setUnlike] = useState('far fa-heart unlike')
   const [category, setCategory] = useState([]);
+  const [show, setShow] = useState(false);
+  const [userProfile, setUserProfile] = useState({
+    firstname: '',
+    lastname: '',
+    id:'',
+  });
 
   const getOffer = () => {
     const url = `http://localhost:3000/api/annonces/${id}`
@@ -40,16 +51,40 @@ const OfferDetail = ({ match }) => {
   const CategoryUserLastName = user.filter(element => element.id === offer.users_id).map(element => element.lastname)[0];
 
   useEffect(() => {
+    getUserData();
     getOffer();
     getUser();
     getCategory();
-  }, [])
+  }, []);
 
   const Likeit = () => {
-    setUnlike('far fa-heart like')
+    if (userProfile.id) {
+      console.log('TES CO FRERE')
+      const url = `http://localhost:3000/api/favorite`;
+      const favoriteData = {
+        "users_id": userProfile.id,
+        "annonces_id": id,
+      }
+      axios.post(url, favoriteData)
+        .then(res => console.log(res))
+        .catch();
+      setUnlike('far fa-heart like')      
+    } else {
+      setShow(true);
+    }
   }
 
-  console.log(offer)
+  const getUserData =() => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/auth',
+      headers: {
+        Authorization: `Bearer ${auth.data}`,
+      },
+    })
+      .then((response) => response.data)
+      .then((data) => setUserProfile(data.authData.user[0]));
+  };
 
   return(
     <>
@@ -72,6 +107,14 @@ const OfferDetail = ({ match }) => {
         <div className="OfferDetail-User">
         <h2>Vendu par :</h2>
           <h3>{CategoryUserFirstName} {CategoryUserLastName}</h3>
+          <div className="OfferButton">
+          <button className="ButtonOffer Action" type="button">
+              Faire une offre
+          </button>
+          <button className="ButtonOffer OfferBtn" type="button">
+              Contacter le vendeur
+          </button>
+          </div>
         <hr/>
         </div>
           <h2>Critères</h2>
@@ -95,12 +138,31 @@ const OfferDetail = ({ match }) => {
         </div>
         <div>
           <h2>Localisation</h2>
+          <div className="OfferLocalisation">
+            <span className="fas fa-map-marker-alt"/>
           <p>{offer.address}, {offer.cp}, {offer.city}<br/>{offer.region}</p>
+          </div>
         </div>
         <div>
-          <MapContainer />
+          {/* <Map /> */}
         </div>
       </div>
+      <Modal show={show} onHide={() => setShow(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Lebonrond</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Vous devez vous connecter pour ajouter une annonce à vos favoris</Modal.Body>
+          <Modal.Footer>
+            <Link to='/login'>
+              <Button variant="primary" className="OfferConBtn"onClick={() => setShow(false)}>
+                Se connecter
+              </Button>
+            </Link>
+            <Button variant="secondary" onClick={() => setShow(false)}>
+              Retour
+            </Button>
+          </Modal.Footer>
+        </Modal>
     </section>
     </>
   );

@@ -1,5 +1,6 @@
 import React, {useReducer, useState, useEffect, useContext} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { Form, Modal, Col, Row, Button } from 'react-bootstrap';
 import Header from '../Header/Header';
 import { authContext } from '../Contexts/AuthContext';
@@ -68,8 +69,6 @@ const getUserInfo = () => {
   };
 
   const [error, setError] = useState("");
-
-  console.log(userInput)
 
   const handleSubmit = (event) => {
       event.preventDefault();
@@ -260,9 +259,11 @@ const getUserInfo = () => {
           </Modal.Header>
           <Modal.Body>Votre annonce a bien été ajoutée</Modal.Body>
           <Modal.Footer>
+          <Link to='/login'>
             <Button className="ButtonAction Action" onClick={() => setSuccessShow(false)}>
               Valider
             </Button>
+          </Link>
           </Modal.Footer>
         </Modal>
       </section>

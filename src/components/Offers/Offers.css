@@ -67,7 +67,7 @@ transition: transform 0.3s ease-in-out;
   border-radius: 10px;
   width: 800px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 0 30px;
   display: flex;
   flex-direction: column;
 }
@@ -85,7 +85,12 @@ transition: transform 0.3s ease-in-out;
 }
 
 .OfferDetail-Photo img{
-  border-radius: 10px;
+  border-bottom-left-radius: none;
+  border-bottom-right-radius: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  max-width: 800px;
+  min-width: 800px;
 }
 
 .OfferDetail-Title {
@@ -134,4 +139,30 @@ transition: transform 0.3s ease-in-out;
 .OfferCritere span {
   font-size: 2.5em;
   align-self: center;
+}
+
+.OfferLocalisation {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 20px 0px;
+}
+
+.OfferLocalisation span {
+  font-size: 2.5em;
+  /* align-self: center; */
+}
+
+.OfferLocalisation p{
+  margin: 0px;
+}
+
+.OfferButton {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 20px 0px 5px 0px;
+}
+
+.OfferConBtn {
+  margin-right: 20px;
 }

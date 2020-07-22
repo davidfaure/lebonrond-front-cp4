@@ -26,6 +26,7 @@ const Header = () => {
 
   const Logout = () => {
     setAuthData(null);
+    localStorage.clear();
   };
 
   return(
@@ -47,17 +48,25 @@ const Header = () => {
         </div>
         <div className="Admin-board Flex">
           <div className="Admin-name">
-          {Profile.firstname === '' ? <p>Bonjour invité</p> : <p>Bonjour {Profile.firstname} {Profile.lastname} </p>}
-            {/* David Faure & test : {Profile.firstname} */}
+          {Profile.firstname === '' 
+          ? 
+          <p>Bonjour invité</p> : 
+          <p>Bonjour {' '}
+            <Link to='/profile' style={{ textDecoration: 'none' }}>
+              {Profile.firstname} {Profile.lastname}
+              </Link>
+          </p>}
           </div>
-          <button
-            type="button"
-            className="Disconnect"
-            tabIndex={0}
-            onClick={Logout}
-          >
-            <span className="fas fa-power-off" />
-          </button>
+          <Link to='/' style={{ textDecoration: 'none', outline: 'none' }}>
+            <button
+              type="button"
+              className="Disconnect"
+              tabIndex={0}
+              onClick={Logout}
+            >
+              <span className="fas fa-power-off" />
+            </button>
+          </Link>
         </div>
       </div>
     </header>
