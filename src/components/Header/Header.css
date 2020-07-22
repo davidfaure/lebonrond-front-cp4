@@ -1,0 +1,31 @@
+.Header-container {
+  display: flex;
+  /* position: absolute; */
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70px;
+  margin: 20px;
+}
+
+.Flex {
+  display: flex;
+}
+
+.Admin-board .Disconnect {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 5px;
+  height: 5px;
+}
+
+.Admin-name {
+  margin-right: 20px;
+  align-items: center;
+}
+
+.Admin-board {
+  justify-content: center;
+  margin-top: 15px;
+}

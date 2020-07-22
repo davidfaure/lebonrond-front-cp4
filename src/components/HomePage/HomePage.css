@@ -1,0 +1,27 @@
+.curved {
+  position: relative;
+  background: #FF6E15;
+  height: 20vh;
+  border-bottom-left-radius: 50% 33%;
+  border-bottom-right-radius: 50% 33%;
+}
+
+.curved h1 {
+  position: absolute;
+  top:30%;
+  left: 40%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.Container-LastOffer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.Container-LastOffer h1 {
+text-align: center;
+margin-top: 50px;
+color: #fff;
+}
