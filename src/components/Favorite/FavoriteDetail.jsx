@@ -6,6 +6,13 @@ import './Favorite.css';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import defaultImage from '../img/default-image.png';
+import styled, { keyframes } from 'styled-components';
+import { zoomIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${zoomIn}`;
+const AnimDiv = styled.div`
+  animation: 1.5s ${zoomAnimation};
+`;
 
 const FavoriteDetail = ({
   index,
@@ -45,7 +52,7 @@ const FavoriteDetail = ({
 
   return(
     <>
-    <div className="Search-Offer-Detail-User">
+    <AnimDiv className="Search-Offer-Detail-User">
     <div className="Search-Offer-Img">
     <Link to={`/offer/${index}`} style={{ textDecoration: 'none' }}>
         <img src={photos === '' ? defaultImage : photos} alt={name} />
@@ -71,7 +78,7 @@ const FavoriteDetail = ({
         </div>
       </div>
     </div>
-  </div>
+  </AnimDiv>
   <Modal show={show} onHide={() => setShow(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Lebonrond</Modal.Title>

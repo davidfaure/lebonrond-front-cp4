@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { authContext } from '../Contexts/AuthContext';
 import defaultImage from '../img/default-image.png';
+import styled, { keyframes } from 'styled-components';
+import { zoomIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${zoomIn}`;
+const AnimDiv = styled.div`
+  animation: 1.5s ${zoomAnimation};
+`;
 
 const SearchDetail = ({
   index,
@@ -72,7 +79,7 @@ const SearchDetail = ({
 
   return(
     <>
-    <div className="Search-Offer-Detail">
+    <AnimDiv className="Search-Offer-Detail">
       <div className="Search-Offer-Img">
       <Link to={`/offer/${index}`} style={{ textDecoration: 'none' }}>
           <img src={photos === '' ? defaultImage : photos} alt={name} />
@@ -94,7 +101,7 @@ const SearchDetail = ({
           </div>
         </div>
       </div>
-    </div>
+    </AnimDiv>
     <Modal show={show} onHide={() => setShow(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Lebonrond</Modal.Title>

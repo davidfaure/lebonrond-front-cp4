@@ -5,6 +5,13 @@ import { Form, Col, Row, Button, Modal } from 'react-bootstrap';
 import './Search.css';
 import { connect } from 'react-redux';
 import fetchResult from '../Action';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 1s ${zoomAnimation};
+`;
 
 const Search = ({ dispatch }) => {
 
@@ -39,7 +46,7 @@ const Search = ({ dispatch }) => {
 
   return(
     <>
-      <div className="Form-Search">
+      <AnimDiv className="Form-Search">
         <h2>Effectuer une recherche</h2>
         <Form onSubmit={handleSubmit}>
           <Row>
@@ -90,7 +97,7 @@ const Search = ({ dispatch }) => {
           <button className="ButtonAction OfferBtn">Rechercher</button>
         </div>
         </Form>
-      </div>
+      </AnimDiv>
       <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Lebonrond</Modal.Title>

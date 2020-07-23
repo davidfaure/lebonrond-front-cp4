@@ -3,13 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FavoriteDetail from './FavoriteDetail';
 import './Favorite.css';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 1s ${zoomAnimation};
+`;
 
 const FavoriteResult = ({ userFavorite, favoriteClicked, userOffer, userOfferClicked }) => {
 
   return(
     <div className="Favorite-Section">
     <section className={favoriteClicked ? "ResultSearch" : "ResultSearch Hidden"}>
-        <div className="Container-FavoriteSearch">
+        <AnimDiv className="Container-FavoriteSearch">
           <h1>Vos annonces favorites :</h1>
           <div className="FavoriteSearch">
           {userFavorite.map((offers) => (
@@ -27,10 +34,10 @@ const FavoriteResult = ({ userFavorite, favoriteClicked, userOffer, userOfferCli
               ))
               }
           </div>
-        </div>
+        </AnimDiv>
     </section>
     <section className={userOfferClicked ? "ResultSearch" : "ResultSearch Hidden"}>
-        <div className="Container-User-Offer-Search">
+        <AnimDiv className="Container-User-Offer-Search">
           <h1>Vos annonces sur lebonrond :</h1>
           <div className="User-Offer-Search">
           {userOffer.map((offers) => (
@@ -48,7 +55,7 @@ const FavoriteResult = ({ userFavorite, favoriteClicked, userOffer, userOfferCli
               ))
               }
           </div>
-        </div>
+        </AnimDiv>
     </section>
     </div>
   );

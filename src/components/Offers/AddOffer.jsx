@@ -5,6 +5,13 @@ import { Form, Modal, Col, Button } from 'react-bootstrap';
 import Header from '../Header/Header';
 import { authContext } from '../Contexts/AuthContext';
 import defaultImage from '../img/default-image.png';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 2s ${zoomAnimation};
+`;
 
 const AddOffer = () => {
   const { auth } = useContext(authContext);
@@ -113,7 +120,7 @@ const getUserInfo = () => {
     <>
     <Header />
     <section className="AddOffer-Container">
-      <div className="AddOfferForm">
+      <AnimDiv className="AddOfferForm">
         <h1>Déposer une annonce</h1>
         <Form onSubmit={handleSubmit}>
           <Col>
@@ -281,7 +288,7 @@ const getUserInfo = () => {
             </div>
             </Col>
           </Form>
-        </div>
+        </AnimDiv>
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Lebonrond</Modal.Title>

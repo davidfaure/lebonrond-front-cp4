@@ -6,7 +6,13 @@ import Header from '../Header/Header';
 import axios from 'axios';
 import './Offers.css';
 import { authContext } from '../Contexts/AuthContext';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
 
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 1.5s ${zoomAnimation};
+`;
 
 const OfferDetail = ({ match }) => {
   const { auth } = useContext(authContext);
@@ -90,7 +96,7 @@ const OfferDetail = ({ match }) => {
     <>
     <Header />
     <section className="OfferDetail">
-      <div className="Container-OfferDetail">
+      <AnimDiv className="Container-OfferDetail">
         <div className="OfferDetail-Photo">
           <img src={offer.photos} alt={offer.photos} />
         </div>
@@ -146,7 +152,7 @@ const OfferDetail = ({ match }) => {
         <div>
           {/* <Map /> */}
         </div>
-      </div>
+      </AnimDiv>
       <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Lebonrond</Modal.Title>
