@@ -18,8 +18,6 @@ const OffersList = () => {
     getOffersList();
   }, [])
 
-  console.log(OffersList);
-
   return(
     <div className="Offer">
       {

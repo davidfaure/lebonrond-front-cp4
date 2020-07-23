@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
 import { authContext } from './Contexts/AuthContext';
@@ -18,7 +17,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
             <section className="LoginBkg">
               <div className="LoginForm">
                 <div className="Nav-logo">
-                  {/* <img src={tricky} className="Img-logo" alt="Tricky" /> */}
                 </div>
                 <Spinner animation="border" role="status">
                   <span className="sr-only">Loading...</span>
@@ -39,10 +37,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       }
     />
   );
-};
-
-PrivateRoute.propTypes = {
-  component: PropTypes.func.isRequired,
 };
 
 export default PrivateRoute;

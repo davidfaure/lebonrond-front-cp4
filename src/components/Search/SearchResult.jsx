@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import SearchDetail from './SearchDetail';
@@ -18,8 +19,6 @@ const SearchResult = ({ search }) => {
     .then((data) => setCategory(data))
     .catch();
   }
-
-  console.log(search)
 
   return(
     <section className={search.searchClicked ? "ResultSearch" : "ResultSearch Hidden"}>
@@ -58,4 +57,11 @@ const SearchResult = ({ search }) => {
 const mapStateToProps = (state) => ({
   search : state.fetchResult,
 })
+
+SearchResult.propTypes = {
+  search: PropTypes.shape({
+    search: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
+}
+
 export default connect(mapStateToProps)(SearchResult);

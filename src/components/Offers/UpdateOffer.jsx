@@ -1,16 +1,16 @@
-import React, {useReducer, useState, useEffect, useContext} from 'react';
+import React, {useReducer, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Form, Modal, Col, Button } from 'react-bootstrap';
 import Header from '../Header/Header';
-import { authContext } from '../Contexts/AuthContext';
 import defaultImage from '../img/default-image.png';
+import OfferCategoryList from './OfferCategoryList';
 
-const AddOffer = () => {
-  const { auth } = useContext(authContext);
+const UpdateOffer = ({ match }) => {
+  const { id } = match.params;
   const [show, setShow] = useState(false);
   const [successShow, setSuccessShow] = useState(false);
-  const [category, setCategory] = useState([]);
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -28,39 +28,15 @@ const AddOffer = () => {
     }
   )
 
-
-const getUserInfo = () => {
-  axios({
-    method: 'post',
-    url: 'http://localhost:3000/api/auth',
-    headers: {
-      Authorization: `Bearer ${auth.data}`,
-    },
-  })
-    .then((response) => response.data)
-    .then((data) => setUserInput(
-      {...userInput, 
-        users_id: data.authData.user[0].id, 
-        address: data.authData.user[0].address,
-        cp: data.authData.user[0].cp,
-        region: data.authData.user[0].region,
-        city: data.authData.user[0].city,
-      }
-      ));
-}
+  const getOfferInfo = () => {
+    const url = `http://localhost:3000/api/annonces/${id}`;
+    axios.get(url)
+      .then(res => setUserInput(res.data));
+  }
 
   useEffect(() => {
-    getCategory();
-    getUserInfo();
+    getOfferInfo();
   }, []);
-
-  const getCategory = () => {
-    const url = 'http://localhost:3000/api/categories/'
-    axios.get(url)
-    .then((response) => response.data)
-    .then((data) => setCategory(data))
-    .catch();
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -69,7 +45,7 @@ const getUserInfo = () => {
 
   const handleSubmit = (event) => {
       event.preventDefault();
-      const url = 'http://localhost:3000/api/annonces';
+      const url = `http://localhost:3000/api/annonces/${id}`;
       if (userInput.name === '' ||
       userInput.description === '' ||
       userInput.etat === '' ||
@@ -84,41 +60,18 @@ const getUserInfo = () => {
       ) {
         setShow(true)
       }
-      axios.post(url, userInput)
+      axios.put(url, userInput)
         .then((res) => res.data && setSuccessShow(true))
   };
-
-  const [opacForm1, SetOpacForm1] = useState('Opac-Form1-true')
-  const [opacForm2, SetOpacForm2] = useState('Opac-Form1-true')
-  const [opacForm3, SetOpacForm3] = useState('Opac-Form1-true')
-  const [hideButton1, SetHideButton1] = useState('ContinueButton')
-  const [hideButton2, SetHideButton2] = useState('ContinueButton')
-  const [hideButton3, SetHideButton3] = useState('ContinueButton')
-  const Opacity1 = () => {
-    SetOpacForm1('Opac-Form1-false')
-    SetHideButton1('ContinueButton-Hidden')
-  }
-
-  const Opacity2 = () => {
-    SetOpacForm2('Opac-Form1-false')
-    SetHideButton2('ContinueButton-Hidden')
-  }
-
-  const Opacity3 = () => {
-    SetOpacForm3('Opac-Form1-false')
-    SetHideButton3('ContinueButton-Hidden')
-  }
 
   return(
     <>
     <Header />
     <section className="AddOffer-Container">
       <div className="AddOfferForm">
-        <h1>Déposer une annonce</h1>
+        <h1>Modifier une annonce</h1>
         <Form onSubmit={handleSubmit}>
           <Col>
-            <div>
-              <h2 className="H2-first">Ajoutons l'essentiel :</h2>
               <Form.Group controlId="name">
                 <Form.Label className="LoginLabels">Titre de l'annonce</Form.Label>
                 <Form.Control
@@ -135,30 +88,19 @@ const getUserInfo = () => {
                   name="category_id"
                   as="select"
                   onChange={handleChange}
+                  value={userInput.category_id}
                 >
                 <option>--- Choisir une catégorie ---</option>
-                {
-                  category.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))
-                }
+                  <OfferCategoryList />
                 </Form.Control>
               </Form.Group>
-              <div className={hideButton1}>
-                <button className="ButtonAction OfferBtn" onClick={Opacity1} type="button" disabled={!userInput.name}>Continuer</button>
-              </div>
-            </div>
-              <div className={opacForm1}>
-                <h2>Définissons votre offre :</h2>
                 <Form.Group controlId="etat">
                   <Form.Label className="LoginLabels">État</Form.Label>
                   <Form.Control
                     name="etat"
                     as="select"
-                    value={userInput.etat}
                     onChange={handleChange}
+                    value={userInput.etat}
                   >
                   <option>--- État du produit ---</option>
                   <option value="État neuf">État neuf</option>
@@ -178,12 +120,6 @@ const getUserInfo = () => {
                     onChange={handleChange}
                   />
                 </Form.Group>
-                <div className={hideButton2}>
-                  <button className="ButtonAction OfferBtn" onClick={Opacity2} type="button" disabled={!userInput.prix}>Continuer</button>
-                </div>
-              </div>
-              <div className={opacForm2}>
-              <h2>Allons plus loin :</h2>
               <div className="Avatar">
                 {userInput.photos ? (
                   <img src={userInput.photos} alt="avatar" />
@@ -212,12 +148,6 @@ const getUserInfo = () => {
                   onChange={handleChange}
                 />
               </Form.Group>
-              <div className={hideButton3}>
-                  <button className="ButtonAction OfferBtn" onClick={Opacity3} type="button" disabled={!userInput.description}>Continuer</button>
-                </div>
-            </div>
-            <div className={opacForm3}>
-            <h2>Localisons le tout:</h2>
             <Form.Group controlId="address">
               <Form.Label className="LoginLabels">Adresse</Form.Label>
               <Form.Control
@@ -276,8 +206,7 @@ const getUserInfo = () => {
               <button
                 className="ButtonAction Action"
                 type="submit"
-              >Ajouter</button>
-            </div>
+              >Modifier</button>
             </div>
             </Col>
           </Form>
@@ -297,9 +226,9 @@ const getUserInfo = () => {
           <Modal.Header closeButton>
             <Modal.Title>Lebonrond</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Votre annonce a bien été ajoutée</Modal.Body>
+          <Modal.Body>L'annonce {userInput.name} a bien été modifiée</Modal.Body>
           <Modal.Footer>
-          <Link to='/'>
+          <Link to='/profile'>
             <Button className="ButtonAction Action" onClick={() => setSuccessShow(false)}>
               Valider
             </Button>
@@ -311,4 +240,12 @@ const getUserInfo = () => {
   );
 };
 
-export default AddOffer;
+UpdateOffer.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+}
+
+export default UpdateOffer;

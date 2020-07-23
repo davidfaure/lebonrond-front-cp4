@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Card } from 'react-bootstrap';
 import './Offers.css';
@@ -32,8 +33,6 @@ const OffersItem = ({
 
   const CategoryOffer = category.filter(element => element.id === category_id).map(element => element.name)[0];
 
-  // console.log(photos);
-
   return(
     <div className="OfferItem">
       <Card style={{ width: '18rem', height: '35rem' }}>
@@ -55,5 +54,16 @@ const OffersItem = ({
     </div>
   );
 };
+
+OffersItem.propTypes = {
+  index: PropTypes.number.isRequired,
+  category_id: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
+  cp: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  photos: PropTypes.string.isRequired,
+  prix: PropTypes.number.isRequired,
+  etat: PropTypes.string.isRequired,
+}
 
 export default OffersItem;

@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -15,7 +16,7 @@ const SearchDetail = ({
   prix,
   etat
 }) => {
-  const {setAuthData, auth } = useContext(authContext);
+  const { auth } = useContext(authContext);
   const [category, setCategory] = useState([]);
   const [unlike, setUnlike] = useState('far fa-heart unlike');
   const [show, setShow] = useState(false);
@@ -76,12 +77,14 @@ const SearchDetail = ({
       <Link to={`/offer/${index}`} style={{ textDecoration: 'none' }}>
           <img src={photos === '' ? defaultImage : photos} alt={name} />
       </Link>
-      <div className="heart-div-search" onClick={Likeit} >
-        <span className={unlike}/>
-      </div>
       </div>
       <div className="Search-Offer-Info">
+        <div className="Search-Title-Like">
           <h2>{name}</h2>
+          <div className="heart-div-search" onClick={Likeit} >
+            <span className={unlike}/>
+          </div>
+        </div>
         <div>
           <p className="Search-Offer-Price">{prix} €</p>
           <div className="ReSearch-Offer-GeneralInfo">
@@ -111,5 +114,16 @@ const SearchDetail = ({
   </>
   );
 };
+
+SearchDetail.propTypes = {
+  index: PropTypes.number.isRequired,
+  category_id: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
+  cp: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  photos: PropTypes.string.isRequired,
+  prix: PropTypes.number.isRequired,
+  etat: PropTypes.string.isRequired,
+}
 
 export default SearchDetail;

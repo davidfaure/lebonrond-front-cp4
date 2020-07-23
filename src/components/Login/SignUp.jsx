@@ -5,7 +5,7 @@ import '../../App.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const SignUp = (props) => {
+const SignUp = () => {
   const [show, setShow] = useState(false);
   const [successShow, setSuccessShow] = useState(false)
   const [userInput, setUserInput] = useReducer(

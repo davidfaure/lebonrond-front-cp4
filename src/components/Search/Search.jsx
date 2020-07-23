@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Form, Col, Row, Button, Modal } from 'react-bootstrap';
 import './Search.css';
@@ -104,5 +105,9 @@ const Search = ({ dispatch }) => {
     </>
   );
 };
+
+Search.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+}
 
 export default connect()(Search)
