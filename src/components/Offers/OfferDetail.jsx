@@ -1,15 +1,15 @@
 import React, {useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import axios from 'axios';
 import './Offers.css';
-import Map from '../Map/Map';
 import { authContext } from '../Contexts/AuthContext';
 
 
 const OfferDetail = ({ match }) => {
-  const {setAuthData, auth } = useContext(authContext);
+  const { auth } = useContext(authContext);
   const { id } = match.params;
   const [offer, SetOffer] = useState({});
   const [user, setUser] = useState([]);
@@ -167,5 +167,13 @@ const OfferDetail = ({ match }) => {
     </>
   );
 };
+
+OfferDetail.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }).isRequired,
+}
 
 export default OfferDetail;

@@ -6,7 +6,7 @@ import './Header.css';
 import { authContext } from '../Contexts/AuthContext';
 
 const Header = () => {
-  const {setAuthData, auth } = useContext(authContext);
+  const { setAuthData, auth } = useContext(authContext);
   const [Profile, setProfile] = useState({
     firstname: '',
     lastname: '',
@@ -27,6 +27,7 @@ const Header = () => {
   const Logout = () => {
     setAuthData(null);
     localStorage.clear();
+    window.location.reload();
   };
 
   return(

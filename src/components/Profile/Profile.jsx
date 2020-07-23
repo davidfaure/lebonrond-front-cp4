@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { authContext } from '../Contexts/AuthContext';
 import Header from '../Header/Header';
 import axios from 'axios';
@@ -7,7 +8,7 @@ import { connect } from 'react-redux';
 import { fetchCategorySearch, fetchUserOffer } from '../Action';
 import FavoriteResult from '../Favorite/FavoriteResult';
 
-const Profile = ({ dispatch, userFavorite, favoriteClicked }) => {
+const Profile = ({ dispatch }) => {
 
   const { auth } = useContext(authContext);
   const [Profile, setProfile] = useState({});
@@ -53,6 +54,8 @@ const Profile = ({ dispatch, userFavorite, favoriteClicked }) => {
     getUserData();
   }, [Profile.id]);
 
+  const condition = Favorite.length !== 0 && Favorite.length !== 66
+
   return(
     <>
       <Header />
@@ -70,15 +73,20 @@ const Profile = ({ dispatch, userFavorite, favoriteClicked }) => {
             <h2>{Offer.length}</h2>
           </div>
           <p> Vous avez {Offer.length} annonces actives sur lebonrond</p>
-          <button className="ButtonOffer OfferBtn" onClick={getUserOffer}>Consulter</button>
+          {Offer.length !== 0 && 
+            <button className="ButtonOffer OfferBtn" onClick={getUserOffer}>Consulter</button>
+          }
         </div>
         <div className="Profile-Favoris-Container">
           <div className="OfferNb">
             <h2>Favoris</h2>
+            {Favorite.length === 66 ?
+            <h2>0</h2> :
             <h2>{Favorite.length}</h2>
+            }
           </div>
-          <p> Vous avez {Favorite.length} annonces favorites sur lebonrond</p>
-            {Favorite.length !== 0 && 
+          <p> Vous avez {Favorite.length === 66 ? 0 : Favorite.length} annonces favorites sur lebonrond</p>
+            {condition && 
               <button className="ButtonOffer FavoriteBtn " onClick={getFavorite}>Consulter</button>
             }
         </div>
@@ -96,5 +104,9 @@ const Profile = ({ dispatch, userFavorite, favoriteClicked }) => {
     </>
   );
 };
+
+Profile.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+}
 
 export default connect()(Profile);

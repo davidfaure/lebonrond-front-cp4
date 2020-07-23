@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useContext } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Form, Modal, Button } from 'react-bootstrap';
 import './Login.css';
@@ -17,10 +18,6 @@ const [userInput, setUserInput] = useReducer(
     }
   )
 
-  const [error, setError] = useState("");
-
-  console.log(" auth c'est : ", auth)
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInput({ [name]: value });
@@ -30,7 +27,6 @@ const [userInput, setUserInput] = useReducer(
     event.preventDefault();
     if (userInput.email === "" || userInput.password === "") {
       setShow(true)
-      setError("Fields are required");
     } else {
       const url = 'http://localhost:3000/api/auth/login';
       axios
@@ -81,10 +77,6 @@ const [userInput, setUserInput] = useReducer(
             >Se Connecter</button>
           </div>
         </Form>
-        {/* <p className="text-center mt-4 LoginLabels">
-          Mot de passe perdu ?{' '}
-          <a href="mailto:support@yopmail.com">Contactez-nous</a>
-        </p> */}
         <p className="text-center mt-4 LoginLabels">
           Pas encore inscrit ?{' '}
           <Link to='/signup' style={{ textDecoration: 'none' }}>
@@ -108,5 +100,13 @@ const [userInput, setUserInput] = useReducer(
     </>
   );
 };
+
+Login.propTypes = {
+  props: PropTypes.func,
+}
+
+Login.defaultProps = {
+  props: undefined,
+}
 
 export default Login;

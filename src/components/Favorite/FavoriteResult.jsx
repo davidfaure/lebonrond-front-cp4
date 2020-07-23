@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FavoriteDetail from './FavoriteDetail';
 import './Favorite.css';
 
-const FavoriteResult = ({ userFavorite, favoriteClicked, userOffer, userOfferClicked}) => {
+const FavoriteResult = ({ userFavorite, favoriteClicked, userOffer, userOfferClicked }) => {
 
   return(
     <div className="Favorite-Section">
@@ -59,5 +60,12 @@ const mapStateToProps = (state) => ({
   userOffer: state.fetchResult.userOffer,
   userOfferClicked: state.fetchResult.userOfferClicked,
 })
+
+FavoriteResult.propTypes = {
+  userFavorite: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  favoriteClicked: PropTypes.bool.isRequired, 
+  userOffer: PropTypes.arrayOf(PropTypes.object).isRequired, 
+  userOfferClicked: PropTypes.bool.isRequired,
+}
 
 export default connect(mapStateToProps)(FavoriteResult);

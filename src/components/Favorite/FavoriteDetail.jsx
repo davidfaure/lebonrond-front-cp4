@@ -1,4 +1,5 @@
 import React, {useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import './Favorite.css';
@@ -16,7 +17,6 @@ const FavoriteDetail = ({
   prix,
   etat,
   userOfferClicked,
-  dispatch
 }) => {
   const [category, setCategory] = useState([]);
   const [show, setShow] = useState(false);
@@ -45,7 +45,7 @@ const FavoriteDetail = ({
 
   return(
     <>
-    <div className="Search-Offer-Detail">
+    <div className="Search-Offer-Detail-User">
     <div className="Search-Offer-Img">
     <Link to={`/offer/${index}`} style={{ textDecoration: 'none' }}>
         <img src={photos === '' ? defaultImage : photos} alt={name} />
@@ -63,7 +63,9 @@ const FavoriteDetail = ({
           </div>
           {userOfferClicked && 
           <div className="Modif-Btn">
+          <Link to={`/update-offer/${index}`}>
             <button className="ButtonOffer OfferBtn">Modifier</button>
+          </Link>
             <button className="ButtonOffer ParamsBtn" onClick={() => setShow(true)}>Supprimer</button>
           </div>}
         </div>
@@ -89,8 +91,19 @@ const FavoriteDetail = ({
 };
 
 const mapStateToProps = (state) => ({
-  favoriteClicked: state.fetchResult.favoriteClicked,
   userOfferClicked: state.fetchResult.userOfferClicked,
 })
+
+FavoriteDetail.propTypes = {
+  index: PropTypes.number.isRequired,
+  category_id: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
+  cp: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  photos: PropTypes.string.isRequired,
+  prix: PropTypes.number.isRequired,
+  etat: PropTypes.string.isRequired,
+  userOfferClicked: PropTypes.bool.isRequired,
+}
 
 export default connect(mapStateToProps)(FavoriteDetail);
