@@ -1,0 +1,48 @@
+.Header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.15);
+  z-index: 1;
+}
+
+.Flex {
+  display: flex;
+}
+
+.Admin-board .Disconnect {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 5px;
+  height: 5px;
+}
+
+.Admin-board .Connect {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 5px;
+  height: 5px;
+  margin-left: 20px;
+}
+
+.Admin-name {
+  margin-right: 20px;
+  align-items: center;
+}
+
+.Admin-board {
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.Admin-name-disc {
+  display: flex;
+}
+
+.fa-sign-in-alt:hover {
+  color: #007BFF;
+}

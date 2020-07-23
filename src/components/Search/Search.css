@@ -1,0 +1,172 @@
+.Form-Search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  position: absolute;
+  margin: 50px;
+  width: 55%;
+  left: 22%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 2px rgba(0,0,0,.2);
+}
+
+.Form-Search form {
+  width: 60%;
+}
+
+.Search-Btn {
+  display: flex;
+  justify-content: center;
+}
+
+.Form-Search h2{
+  margin-bottom: 20px;
+}
+
+.row {
+  margin-bottom: 10px;
+}
+
+.Container-ResultSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 50%;
+  margin: auto;
+  padding: 30px;
+  background: #fff;
+}
+
+.Container-ResultSearch span {
+  font-weight: 200;
+}
+
+.ResultSearch {
+  margin: 20px 0px 40px 0px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Hidden {
+  display: none;
+}
+
+.Search-Offer-Detail {
+  display: flex;
+  margin: 20px;
+  box-shadow: 1px 1px 8px 1px #e6ebef;
+  border-radius: .5rem;
+  width: 80%;
+}
+
+.Search-Offer-Detail-User {
+  display: flex;
+  margin: 20px;
+  box-shadow: 1px 1px 8px 1px #e6ebef;
+  border-radius: .5rem;
+}
+
+
+.Search-Offer-Img {
+  width: 30%;
+  position: relative;
+}
+
+.Offer-Like-Search {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Search-Offer-Img img {
+max-width: 100%;
+border-top-left-radius: .5rem;
+border-bottom-left-radius: .5rem;
+border-right: 1px solid #ECEEEF;
+}
+
+.Search-Offer-Info {
+  margin: 10px 0px 0px 20px;
+  width: 65%;
+}
+
+.Search-Offer-Info h2 {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.Search-Offer-Info p {
+  font-weight: 200;
+}
+
+.Search-Offer-Price {
+  font-weight: 400 !important;
+  color: #FF6E15;
+  margin-bottom: 40px;
+}
+
+.Search-Offer-GeneralInfo p {
+  margin-bottom: 0px;
+}
+
+.Search-Offer-GeneralInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ReSearch-Offer-GeneralInfo p {
+  margin-bottom: 0px !important;
+}
+
+.heart-div-search {
+  display: flex;
+  justify-content: center;
+  width: 2.5em;
+  height: 2.5em;
+  padding: 5px;
+  border-radius: 50%;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.2), 0 3px 1px -2px rgba(0,0,0,.04), 0 2px 2px 0 rgba(0,0,0,.04);
+  background: #fff;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  -moz-transition:0.3s ease-in-out;
+  -ms-transition:0.3s ease-in-out;
+  -o-transition:0.3s ease-in-out;
+}
+  
+.heart-div-search:hover {
+  transition: transform 0.3 ease-in-out;
+  transform:scale(1.2);
+  -moz-transform:scale(1.2);
+  -ms-transform:scale(1.2);
+  -o-transform:scale(1.2);
+}
+  
+
+.heart-div-search .unlike{
+  font-size: 1.5em;
+  align-self: center;
+  cursor: pointer;
+}
+
+.heart-div-search .like{
+  font-size: 1.5em;
+  align-self: center;
+  color: #FF6E15;
+}
+
+.Search-Title-Like {
+  display: flex;
+  justify-content: space-between;
+}
