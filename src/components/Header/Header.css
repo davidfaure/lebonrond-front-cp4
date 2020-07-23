@@ -21,6 +21,15 @@
   height: 5px;
 }
 
+.Admin-board .Connect {
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 5px;
+  height: 5px;
+  margin-left: 20px;
+}
+
 .Admin-name {
   margin-right: 20px;
   align-items: center;
@@ -29,4 +38,12 @@
 .Admin-board {
   justify-content: center;
   margin-top: 15px;
+}
+
+.Admin-name-disc {
+  display: flex;
+}
+
+.fa-sign-in-alt:hover {
+  color: #007BFF;
 }

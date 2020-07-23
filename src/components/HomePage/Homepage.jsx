@@ -10,18 +10,18 @@ const HomePage = () => {
     <>
       <Header />
       <section>
-      <div className="curved">
-      <Search />
-      </div>
-      <div>
-        <SearchResult />
-      </div>
-      <div className="Container-LastOffer">
-      <div className="LastOffer">
-        <h1>Les dernières annonces</h1>
-      </div>
+        <div className="curved">
+          <Search />
+        </div>
+        <div>
+          <SearchResult />
+        </div>
+        <div className="Container-LastOffer">
+          <div className="LastOffer">
+            <h1>Les dernières annonces</h1>
+          </div>
           <OffersList />
-      </div>
+        </div>
       </section>
     </>
   );

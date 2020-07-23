@@ -50,7 +50,18 @@ const Header = () => {
           <div className="Admin-name">
           {Profile.firstname === '' 
           ? 
-          <p>Bonjour invité</p> : 
+          <div className="Admin-name-disc">
+          <p>Bonjour invité</p>
+          <Link to='/login' style={{ textDecoration: 'none', outline: 'none' }}>
+            <button
+              type="button"
+              className="Connect"
+            >
+              <span className="fas fa-sign-in-alt" />
+            </button>
+          </Link> 
+          </div>
+          : 
           <p>Bonjour {' '}
             <Link to='/profile' style={{ textDecoration: 'none' }}>
               {Profile.firstname} {Profile.lastname}

@@ -23,6 +23,10 @@
 }
 
 .Form-Search h2{
+  margin-bottom: 20px;
+}
+
+.row {
   margin-bottom: 10px;
 }
 
@@ -61,6 +65,7 @@
   width: 30%;
   position: relative;
 }
+
 
 .heart-div-search {
   display: flex;
@@ -101,7 +106,8 @@ border-bottom-left-radius: .5rem;
 }
 
 .Search-Offer-Info {
-  margin: 30px 0px 0px 20px;
+  margin: 10px 0px 0px 20px;
+  width: 60%;
 }
 
 .Search-Offer-Info h2 {
@@ -122,3 +128,12 @@ border-bottom-left-radius: .5rem;
 .Search-Offer-GeneralInfo p {
   margin-bottom: 0px;
 }
+
+.Search-Offer-GeneralInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .ReSearch-Offer-GeneralInfo {
+  
+} */
