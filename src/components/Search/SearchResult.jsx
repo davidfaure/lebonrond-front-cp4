@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import SearchDetail from './SearchDetail';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 1s ${zoomAnimation};
+`;
 
 const SearchResult = ({ search }) => {
 
@@ -22,7 +29,7 @@ const SearchResult = ({ search }) => {
 
   return(
     <section className={search.searchClicked ? "ResultSearch" : "ResultSearch Hidden"}>
-      <div className="Container-ResultSearch">
+      <AnimDiv className="Container-ResultSearch">
         <h1>Resultats de votre recherche </h1>
         {
           search.search.length !== 0 ? (
@@ -49,7 +56,7 @@ const SearchResult = ({ search }) => {
             <p> Oups, il n'y a aucunes annonces avec cette region et/ou cette catégorie </p>
           )
         }
-      </div>
+      </AnimDiv>
     </section>
   );
 };

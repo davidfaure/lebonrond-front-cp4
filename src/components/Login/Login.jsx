@@ -6,6 +6,13 @@ import './Login.css';
 import '../../App.css';
 import { Link, Redirect } from 'react-router-dom';
 import { authContext } from '../Contexts/AuthContext';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 2s ${zoomAnimation};
+`;
 
 const Login = (props) => {
 const { setAuthData, auth } = useContext(authContext);
@@ -42,7 +49,7 @@ const [userInput, setUserInput] = useReducer(
     <>
     { auth.data ? <Redirect to='/add-offer' /> :
     <section className="Container-Login">
-      <div className="LoginForm">
+      <AnimDiv className="LoginForm">
         <div className="Nav-logo">
           <Link to='/' style={{ textDecoration: 'none' }}>
           <h1 className="Text-Logo">lebonrond</h1>
@@ -83,7 +90,7 @@ const [userInput, setUserInput] = useReducer(
             Créer un compte
           </Link>
         </p>
-      </div>
+      </AnimDiv>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Lebonrond</Modal.Title>

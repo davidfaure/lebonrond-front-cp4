@@ -4,6 +4,14 @@ import './Login.css';
 import '../../App.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 2s ${zoomAnimation};
+`;
+
 
 const SignUp = () => {
   const [show, setShow] = useState(false);
@@ -48,7 +56,7 @@ const SignUp = () => {
 
   return(
     <section className="Container-Login">
-      <div className="SignupForm">
+      <AnimDiv className="SignupForm">
         <div className="Nav-logo">
           <Link to='/' style={{ textDecoration: 'none' }}>
           <h1 className="Text-Logo">lebonrond</h1>
@@ -166,7 +174,7 @@ const SignUp = () => {
             >Créer mon compte</button>
           </div>
         </Form>
-      </div>
+      </AnimDiv>
       <Modal show={show} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Lebonrond</Modal.Title>

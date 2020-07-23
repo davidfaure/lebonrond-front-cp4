@@ -7,6 +7,14 @@ import './Profile.css';
 import { connect } from 'react-redux';
 import { fetchCategorySearch, fetchUserOffer } from '../Action';
 import FavoriteResult from '../Favorite/FavoriteResult';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 1s ${zoomAnimation};
+`;
+
 
 const Profile = ({ dispatch }) => {
 
@@ -60,7 +68,7 @@ const Profile = ({ dispatch }) => {
     <>
       <Header />
       <section className="Profile-Section">
-      <div className="Profile-Info-Container">
+      <AnimDiv className="Profile-Info-Container">
         <div className="Profile-Data-Container">
           <h2>{Profile.firstname} {Profile.lastname}</h2>
           <p><strong>Email</strong> : {Profile.email}</p>
@@ -98,7 +106,7 @@ const Profile = ({ dispatch }) => {
           <p> Vous pouvez modifier les paramètres de confidentialité</p>
             <button className="ButtonOffer ParamsBtn ">Modifier</button>
         </div>
-      </div>
+      </AnimDiv>
         <FavoriteResult />
       </section>
     </>

@@ -6,6 +6,13 @@ import { Form, Modal, Col, Button } from 'react-bootstrap';
 import Header from '../Header/Header';
 import defaultImage from '../img/default-image.png';
 import OfferCategoryList from './OfferCategoryList';
+import styled, { keyframes } from 'styled-components';
+import { fadeIn } from 'react-animations';
+
+const zoomAnimation = keyframes`${fadeIn}`;
+const AnimDiv = styled.div`
+  animation: 2s ${zoomAnimation};
+`;
 
 const UpdateOffer = ({ match }) => {
   const { id } = match.params;
@@ -68,7 +75,7 @@ const UpdateOffer = ({ match }) => {
     <>
     <Header />
     <section className="AddOffer-Container">
-      <div className="AddOfferForm">
+      <AnimDiv className="AddOfferForm">
         <h1>Modifier une annonce</h1>
         <Form onSubmit={handleSubmit}>
           <Col>
@@ -210,7 +217,7 @@ const UpdateOffer = ({ match }) => {
             </div>
             </Col>
           </Form>
-        </div>
+        </AnimDiv>
         <Modal show={show} onHide={() => setShow(false)}>
           <Modal.Header closeButton>
             <Modal.Title>Lebonrond</Modal.Title>
