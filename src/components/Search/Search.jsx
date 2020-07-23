@@ -36,8 +36,6 @@ const Search = ({ dispatch }) => {
     getCategory();
   }, [])
 
-  // console.log(region, category_id)
-
   return(
     <>
       <div className="Form-Search">

@@ -1,8 +1,10 @@
 const initialState = {
   search:[], 
   favorite:[], 
+  userOffer: [],
   searchClicked: false, 
-  favoriteClicked: false 
+  favoriteClicked: false,
+  userOfferClicked: false, 
 }
 
 const fetchResult = (state = initialState, action) => {
@@ -17,6 +19,11 @@ const fetchResult = (state = initialState, action) => {
         ...state,
         favorite: action.result
       };
+    case 'FETCH_USER_OFFER':
+      return {
+        ...state,
+        userOffer: action.result
+      };
     case 'SEARCH_CLICKED':
       return {
         ...state,
@@ -26,6 +33,11 @@ const fetchResult = (state = initialState, action) => {
       return {
         ...state,
         favoriteClicked: action.payload,
+      }
+    case 'USER_OFFER_CLICKED':
+      return {
+        ...state,
+        userOfferClicked: action.payload,
       }
     default:
       return state;

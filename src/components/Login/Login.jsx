@@ -38,7 +38,7 @@ const [userInput, setUserInput] = useReducer(
         .then((res) => {
           setAuthData(res.data.token)
         })
-        .then(() => props.history.push('/add-offer'))
+        .then(() => props.history.push('/profile'))
     }
   }
 

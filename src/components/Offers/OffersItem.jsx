@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Card } from 'react-bootstrap';
 import './Offers.css';
 import { Link } from 'react-router-dom';
+import defaultImage from '../img/default-image.png';
 
 const OffersItem = ({
   index,
@@ -31,11 +32,13 @@ const OffersItem = ({
 
   const CategoryOffer = category.filter(element => element.id === category_id).map(element => element.name)[0];
 
+  // console.log(photos);
+
   return(
     <div className="OfferItem">
       <Card style={{ width: '18rem', height: '35rem' }}>
       <div className="Offer-Img">
-        <Card.Img variant="top" src={photos}/>
+        <Card.Img variant="top" src={photos === '' ? defaultImage : photos}/>
       </div>
           <Card.Body>
             <Card.Title>{name}</Card.Title>

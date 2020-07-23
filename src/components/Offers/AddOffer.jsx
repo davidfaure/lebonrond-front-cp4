@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Form, Modal, Col, Row, Button } from 'react-bootstrap';
 import Header from '../Header/Header';
 import { authContext } from '../Contexts/AuthContext';
+import defaultImage from '../img/default-image.png';
 
 const AddOffer = () => {
   const { auth } = useContext(authContext);
@@ -185,6 +186,13 @@ const getUserInfo = () => {
               </div>
               <div className={opacForm2}>
               <h2>Allons plus loin :</h2>
+              <div className="Avatar">
+                {userInput.photos ? (
+                  <img src={userInput.photos} alt="avatar" />
+                ) : (
+                  <img src={defaultImage} alt="avatar" />
+                )}
+              </div>
                 <Form.Group controlId="photos">
                   <Form.Label className="LoginLabels">Photo</Form.Label>
                   <Form.Control

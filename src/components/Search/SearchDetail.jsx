@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { authContext } from '../Contexts/AuthContext';
+import defaultImage from '../img/default-image.png';
 
 const SearchDetail = ({
   index,
@@ -73,7 +74,7 @@ const SearchDetail = ({
     <div className="Search-Offer-Detail">
       <div className="Search-Offer-Img">
       <Link to={`/offer/${index}`} style={{ textDecoration: 'none' }}>
-          <img src={photos} alt={name} />
+          <img src={photos === '' ? defaultImage : photos} alt={name} />
       </Link>
       <div className="heart-div-search" onClick={Likeit} >
         <span className={unlike}/>
@@ -81,12 +82,9 @@ const SearchDetail = ({
       </div>
       <div className="Search-Offer-Info">
           <h2>{name}</h2>
-          {/* <div className="heart-div" onClick={Likeit}>
-                <span className={unlike} />
-          </div> */}
         <div>
           <p className="Search-Offer-Price">{prix} €</p>
-          <div className="Search-Offer-GeneralInfo">
+          <div className="ReSearch-Offer-GeneralInfo">
             <p>{CategoryOffer}</p>
             <p>{etat}</p>
             <p>{cp}, {city}</p>

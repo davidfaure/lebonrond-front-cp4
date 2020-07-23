@@ -3,10 +3,13 @@ import { authContext } from '../Contexts/AuthContext';
 import Header from '../Header/Header';
 import axios from 'axios';
 import './Profile.css';
+import { connect } from 'react-redux';
+import { fetchCategorySearch, fetchUserOffer } from '../Action';
+import FavoriteResult from '../Favorite/FavoriteResult';
 
-const Profile = () => {
+const Profile = ({ dispatch, userFavorite, favoriteClicked }) => {
 
-  const {setAuthData, auth } = useContext(authContext);
+  const { auth } = useContext(authContext);
   const [Profile, setProfile] = useState({});
   const [Offer, setOffer] = useState([]);
   const [Favorite, setFavorite] = useState([]);
@@ -30,18 +33,25 @@ const Profile = () => {
         .then(res => setFavorite(res.data));
   }
 
-  // const getFavoriteNb = () => {
-  //   const url = `http://localhost:3000/api/users/${Profile.id}/favorite`
-  //   axios.get(url)
-  //     .then(res => setFavorite(res.data))
-  // }
+  const getFavorite = () => {
+    const url = `http://localhost:3000/api/users/${Profile.id}/favorite`
+    dispatch({type: 'FAV_CLICKED', payload: true})
+    dispatch({type: 'USER_OFFER_CLICKED', payload: false})
+    axios.get(url)
+      .then(res => {dispatch(fetchCategorySearch(res.data))})
+  }
+
+  const getUserOffer = () => {
+    const url = `http://localhost:3000/api/annonces?user=${Profile.id}`
+    dispatch({type: 'USER_OFFER_CLICKED', payload: true})
+    dispatch({type: 'FAV_CLICKED', payload: false})
+    axios.get(url)
+      .then(res => {dispatch(fetchUserOffer(res.data))});
+  }
 
   useEffect(() => {
     getUserData();
-    // getFavoriteNb();
   }, [Profile.id]);
-
-  console.log(Profile)
 
   return(
     <>
@@ -60,7 +70,7 @@ const Profile = () => {
             <h2>{Offer.length}</h2>
           </div>
           <p> Vous avez {Offer.length} annonces actives sur lebonrond</p>
-          <button className="ButtonOffer OfferBtn">Modifier</button>
+          <button className="ButtonOffer OfferBtn" onClick={getUserOffer}>Consulter</button>
         </div>
         <div className="Profile-Favoris-Container">
           <div className="OfferNb">
@@ -68,7 +78,9 @@ const Profile = () => {
             <h2>{Favorite.length}</h2>
           </div>
           <p> Vous avez {Favorite.length} annonces favorites sur lebonrond</p>
-          <button className="ButtonOffer FavoriteBtn ">Consulter</button>
+            {Favorite.length !== 0 && 
+              <button className="ButtonOffer FavoriteBtn " onClick={getFavorite}>Consulter</button>
+            }
         </div>
         <div className="Profile-Params-Container">
         <div className="OfferParams">
@@ -79,9 +91,10 @@ const Profile = () => {
             <button className="ButtonOffer ParamsBtn ">Modifier</button>
         </div>
       </div>
+        <FavoriteResult />
       </section>
     </>
   );
 };
 
-export default Profile;
+export default connect()(Profile);

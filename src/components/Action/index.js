@@ -12,4 +12,11 @@ export const fetchCategorySearch = (result) => {
   }
 }
 
+export const fetchUserOffer = (result) => {
+  return {
+    type: 'FETCH_USER_OFFER',
+    result,
+  }
+}
+
 export default fetchResult;
