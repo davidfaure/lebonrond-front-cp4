@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import PropTypes from 'prop-types';
+import { authContext } from '../Contexts/AuthContext';
 import axios from 'axios';
-import { Card } from 'react-bootstrap';
+import { Card, Modal, Button } from 'react-bootstrap';
 import './Offers.css';
 import { Link } from 'react-router-dom';
 import defaultImage from '../img/default-image.png';
@@ -24,10 +25,19 @@ const OffersItem = ({
   etat
 }) => {
 
+  const { auth } = useContext(authContext);
   const [category, setCategory] = useState([]);
+  const [show, setShow] = useState(false);
+  const [unlike, setUnlike] = useState('far fa-heart unlike');
+  const [userProfile, setUserProfile] = useState({
+    firstname: '',
+    lastname: '',
+    id:'',
+  });
 
   useEffect(() => {
     getCategory();
+    getUserData();
   }, []);
 
   const getCategory = () => {
@@ -38,27 +48,76 @@ const OffersItem = ({
     .catch();
   }
 
+  const getUserData = () => {
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/api/auth',
+      headers: {
+        Authorization: `Bearer ${auth.data}`,
+      },
+    })
+      .then((response) => response.data)
+      .then((data) => setUserProfile(data.authData.user[0]));
+  };
+
+  const Likeit = () => {
+    if (userProfile.id) {
+      const url = `http://localhost:3000/api/favorite`;
+      const favoriteData = {
+        "users_id": userProfile.id,
+        "annonces_id": index,
+      }
+      axios.post(url, favoriteData)
+        .then(res => res.data)
+        .catch();
+      setUnlike('far fa-heart like')      
+    } else {
+      setShow(true);
+    }
+  }
+
   const CategoryOffer = category.filter(element => element.id === category_id).map(element => element.name)[0];
 
   return(
-    <div className="OfferItem">
-      <AnimDiv style={{ width: '18rem', height: '35rem' }}>
-      <div className="Offer-Img">
-        <Card.Img variant="top" src={photos === '' ? defaultImage : photos}/>
+    <>
+      <div className="OfferItem">
+        <AnimDiv style={{ width: '18rem', height: '35rem' }}>
+        <div className="Offer-Img">
+          <Card.Img variant="top" src={photos === '' ? defaultImage : photos}/>
+          <div className="heart-div-offer" onClick={Likeit} >
+              <span className={unlike}/>
+          </div>
+        </div>
+            <Card.Body>
+              <Card.Title>{name}</Card.Title>
+              <Card.Subtitle className="Offer-price">{prix} €</Card.Subtitle>
+              <Card.Text>{CategoryOffer}</Card.Text>
+              <Card.Text>{etat}<br/>{city} {cp}</Card.Text>
+              <div className="Offer-btn">
+                <Link to={`/offer/${index}`}>
+                <button className="ButtonAction Action">Plus d'infos</button>
+                </Link>
+              </div>
+            </Card.Body>
+        </AnimDiv>
       </div>
-          <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Subtitle className="Offer-price">{prix} €</Card.Subtitle>
-            <Card.Text>{CategoryOffer}</Card.Text>
-            <Card.Text>{etat}<br/>{city} {cp}</Card.Text>
-            <div className="Offer-btn">
-              <Link to={`/offer/${index}`}>
-              <button className="ButtonAction Action">Plus d'infos</button>
-              </Link>
-            </div>
-          </Card.Body>
-      </AnimDiv>
-    </div>
+      <Modal show={show} onHide={() => setShow(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Lebonrond</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Vous devez vous connecter pour ajouter une annonce à vos favoris</Modal.Body>
+      <Modal.Footer>
+        <Link to='/login'>
+          <Button variant="primary" className="OfferConBtn"onClick={() => setShow(false)}>
+            Se connecter
+          </Button>
+        </Link>
+        <Button variant="secondary" onClick={() => setShow(false)}>
+          Retour
+        </Button>
+      </Modal.Footer>
+    </Modal>
+    </>
   );
 };
 

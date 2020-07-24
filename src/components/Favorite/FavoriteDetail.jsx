@@ -44,7 +44,7 @@ const FavoriteDetail = ({
     setShow(false);
     const url = `http://localhost:3000/api/annonces/${index}`
     axios.delete(url)
-      .then((response) => console.log(response))
+      .then((response) => response.data)
       .then(() => window.location.reload());
   }
 

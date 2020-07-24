@@ -89,12 +89,22 @@ td {
   background-color: #E0A800
 }
 
+.ProfileBtn:disabled,
+.ProfileBtn[disabled] {
+  cursor: not-allowed;
+}
+
 .ParamsBtn {
   background-color: #DC3545;
 }
 
 .ParamsBtn:hover {
   background-color: #C82333;
+}
+
+.ParamsBtn:disabled,
+.ParamsBtn[disabled] {
+  cursor: not-allowed;
 }
 
 

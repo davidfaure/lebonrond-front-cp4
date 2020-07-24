@@ -73,7 +73,7 @@ const Profile = ({ dispatch }) => {
           <h2>{Profile.firstname} {Profile.lastname}</h2>
           <p><strong>Email</strong> : {Profile.email}</p>
           <p><strong>Adresse</strong> : {Profile.address}, {Profile.cp}, {Profile.city}, {Profile.region}</p>
-          <button className="ButtonOffer ProfileBtn">Modifier</button>
+          <button className="ButtonOffer ProfileBtn" disabled>Modifier</button>
         </div>
         <div className="Profile-Annonces-Container">
           <div className="OfferNb">
@@ -104,7 +104,7 @@ const Profile = ({ dispatch }) => {
             <span className="fas fa-cog"/>
           </div>
           <p> Vous pouvez modifier les paramètres de confidentialité</p>
-            <button className="ButtonOffer ParamsBtn ">Modifier</button>
+            <button className="ButtonOffer ParamsBtn" disabled>Modifier</button>
         </div>
       </AnimDiv>
         <FavoriteResult />

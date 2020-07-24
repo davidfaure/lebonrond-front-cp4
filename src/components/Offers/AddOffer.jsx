@@ -224,7 +224,7 @@ const getUserInfo = () => {
                 </div>
             </div>
             <div className={opacForm3}>
-            <h2>Localisons le tout:</h2>
+            <h2>Localisons le tout :</h2>
             <Form.Group controlId="address">
               <Form.Label className="LoginLabels">Adresse</Form.Label>
               <Form.Control

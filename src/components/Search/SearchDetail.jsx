@@ -60,14 +60,13 @@ const SearchDetail = ({
 
   const Likeit = () => {
     if (userProfile.id) {
-      console.log('TES CO FRERE')
       const url = `http://localhost:3000/api/favorite`;
       const favoriteData = {
         "users_id": userProfile.id,
         "annonces_id": index,
       }
       axios.post(url, favoriteData)
-        .then(res => console.log(res))
+        .then(res => res.data)
         .catch();
       setUnlike('far fa-heart like')      
     } else {
