@@ -36,8 +36,6 @@ const SignUp = () => {
     setUserInput({ [name]: value });
   };
 
-  console.log(userInput)
-
   const handleSubmit = (event) => {
       event.preventDefault();
       const url = 'http://localhost:3000/api/users/'
@@ -49,7 +47,7 @@ const SignUp = () => {
         setShow(true);
       } else {
         axios.post(url, userInput)
-          .then((res) => console.log(res))
+          .then((res) => res.data)
           .then(() => setSuccessShow(true))
       }
   }
@@ -67,7 +65,7 @@ const SignUp = () => {
         <Row>
         <Col>
           <Form.Group controlId="firstname">
-              <Form.Label className="LoginLabels">Prénom *</Form.Label>
+              <Form.Label className="LoginLabels">Prénom <span className="Required">*</span></Form.Label>
               <Form.Control
                 name="firstname"
                 type="text"
@@ -77,7 +75,7 @@ const SignUp = () => {
               />
             </Form.Group>
             <Form.Group controlId="lastname">
-              <Form.Label className="LoginLabels">Nom *</Form.Label>
+              <Form.Label className="LoginLabels">Nom <span className="Required">*</span></Form.Label>
               <Form.Control
                 name="lastname"
                 type="text"
@@ -87,7 +85,7 @@ const SignUp = () => {
               />
             </Form.Group>
             <Form.Group controlId="email">
-              <Form.Label className="LoginLabels">Adresse email *</Form.Label>
+              <Form.Label className="LoginLabels">Adresse email <span className="Required">*</span></Form.Label>
               <Form.Control
                 name="email"
                 type="email"
@@ -97,7 +95,7 @@ const SignUp = () => {
               />
             </Form.Group>
             <Form.Group controlId="password">
-              <Form.Label className="LoginLabels">Mot de passe *</Form.Label>
+              <Form.Label className="LoginLabels">Mot de passe <span className="Required">*</span></Form.Label>
               <Form.Control
                 name="password"
                 type="password"
