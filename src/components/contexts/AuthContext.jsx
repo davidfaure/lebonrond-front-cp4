@@ -1,27 +1,45 @@
-import React, { createContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { createContext, useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 export const authContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({ loading: true, data: null });
+  const [auth, setAuth] = useState({ loading: true, token: null, user: null });
   const setAuthData = (data) => {
-    setAuth({ data });
+    console.log(data);
+    setAuth({ ...auth, loading: false, token: data });
+  };
+
+  const setUserData = (userData) => {
+    console.log(userData);
+    setAuth({ ...auth, loading: false, user: userData });
+  };
+
+  const resetState = () => {
+    console.log("LOGOUT");
+    setAuth({ loading: true, token: null, user: null });
   };
 
   useEffect(() => {
     setAuth({
       loading: false,
-      data: JSON.parse(window.localStorage.getItem('authData')),
+      token: JSON.parse(window.localStorage.getItem("token")),
+      user: JSON.parse(window.localStorage.getItem("user")),
     });
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem('authData', JSON.stringify(auth.data));
-  }, [auth.data]);
+    window.localStorage.setItem("token", JSON.stringify(auth.token));
+  }, [auth.token]);
+
+  useEffect(() => {
+    window.localStorage.setItem("user", JSON.stringify(auth.user));
+  }, [auth.user]);
 
   return (
-    <authContext.Provider value={{ auth, setAuthData }}>
+    <authContext.Provider
+      value={{ auth, setAuthData, setUserData, resetState }}
+    >
       {children}
     </authContext.Provider>
   );

@@ -33,19 +33,13 @@ const Search = ({ dispatch }) => {
     dispatch({ type: "KEYWORD_NAME", payload: userInput.name });
     if (!userInput.region && !userInput.category_id && !userInput.name) {
       setShow(true);
-    } else if (!userInput.name) {
-      dispatch({ type: "SEARCH_CLICKED", payload: true });
-      const url = `http://localhost:3000/api/annonces/double?category=${userInput.category_id}&region=${userInput.region}`;
-      axios.get(url).then((res) => {
-        dispatch(fetchResult(res.data));
-      });
-    } else if (userInput.name) {
-      dispatch({ type: "SEARCH_CLICKED", payload: true });
-      const url = `http://localhost:3000/api/annonces?search=${userInput.name}`;
-      axios.get(url).then((res) => {
-        dispatch(fetchResult(res.data));
-      });
     }
+    dispatch({ type: "SEARCH_CLICKED", payload: true });
+    const url = `http://localhost:3000/api/annonces/?search=${userInput.name}&category=${userInput.category_id}&region=${userInput.region}`;
+    axios.get(url).then((res) => {
+      console.log(res.data, "TEST");
+      dispatch(fetchResult(res.data));
+    });
   };
 
   const getCategory = () => {
@@ -80,7 +74,7 @@ const Search = ({ dispatch }) => {
                   as="select"
                   onChange={handleChange}
                 >
-                  <option>--- Choisir une catégorie ---</option>
+                  <option value="">--- Choisir une catégorie ---</option>
                   {category.map((category) => (
                     <option key={category.id} value={category.id}>
                       {category.name}
@@ -108,7 +102,7 @@ const Search = ({ dispatch }) => {
                   value={userInput.region}
                   onChange={handleChange}
                 >
-                  <option>--- Choisir une région ---</option>
+                  <option value="">--- Choisir une région ---</option>
                   <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
                   <option value="Occitanie">Occitanie</option>
                   <option value="Ile-de-France">Ile-de-France</option>

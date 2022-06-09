@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import Spinner from 'react-bootstrap/Spinner';
-import { authContext } from './Contexts/AuthContext';
-import '../App.css';
+import React, { useContext } from "react";
+import { Route, Redirect } from "react-router-dom";
+import Spinner from "react-bootstrap/Spinner";
+import { authContext } from "./Contexts/AuthContext";
+import "../App.css";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { auth } = useContext(authContext);
@@ -16,8 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
           return (
             <section className="LoginBkg">
               <div className="LoginForm">
-                <div className="Nav-logo">
-                </div>
+                <div className="Nav-logo"></div>
                 <Spinner animation="border" role="status">
                   <span className="sr-only">Loading...</span>
                 </Spinner>
@@ -33,7 +32,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(routeProps) =>
-        auth.data ? <Component {...routeProps} /> : <Redirect to="/" />
+        auth.token ? <Component {...routeProps} /> : <Redirect to="/" />
       }
     />
   );
