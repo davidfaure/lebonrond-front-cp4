@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Form, Col, Row, Button, Modal } from "react-bootstrap";
@@ -7,15 +7,17 @@ import { connect } from "react-redux";
 import fetchResult from "../Action";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
+import { appContext } from "../Contexts/appContext";
 
 const zoomAnimation = keyframes`${fadeIn}`;
 const AnimDiv = styled.div`
   animation: 1s ${zoomAnimation};
 `;
 
-const Search = ({ dispatch }) => {
+const Search = () => {
   const [category, setCategory] = useState([]);
   const [show, setShow] = useState(false);
+  const { dispatch } = useContext(appContext);
 
   const [userInput, setUserInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -32,12 +34,11 @@ const Search = ({ dispatch }) => {
     dispatch({ type: "KEYWORD_CATEGORY", payload: userInput.category_id });
     dispatch({ type: "KEYWORD_NAME", payload: userInput.name });
     if (!userInput.region && !userInput.category_id && !userInput.name) {
-      setShow(true);
+      return setShow(true);
     }
     dispatch({ type: "SEARCH_CLICKED", payload: true });
     const url = `http://localhost:3000/api/annonces/?search=${userInput.name}&category=${userInput.category_id}&region=${userInput.region}`;
     axios.get(url).then((res) => {
-      console.log(res.data, "TEST");
       dispatch(fetchResult(res.data));
     });
   };
@@ -155,4 +156,4 @@ Search.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(Search);
+export default Search;

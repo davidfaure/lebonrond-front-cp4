@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { connect } from "react-redux";
 import SearchDetail from "./SearchDetail";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
+import { appContext } from "../Contexts/appContext";
 
 const zoomAnimation = keyframes`${fadeIn}`;
 const AnimDiv = styled.div`
   animation: 1s ${zoomAnimation};
 `;
 
-const SearchResult = ({ search, searchKeyword }) => {
+const SearchResult = () => {
   const [category, setCategory] = useState([]);
+
+  const { appData } = useContext(appContext);
+
+  console.log(appData, "APP DATA");
 
   useEffect(() => {
     getCategory();
-  }, [search]);
+  }, [appData]);
 
   const getCategory = () => {
     const url = "http://localhost:3000/api/categories/";
@@ -29,21 +33,19 @@ const SearchResult = ({ search, searchKeyword }) => {
 
   // console.log(searchKeyword);
   const nameCategory = category
-    .filter((element) => element.id === Number(searchKeyword.category))
+    .filter((element) => element.id === Number(appData.searchKeyword.category))
     .map((element) => element.name)[0];
-
-  console.log(nameCategory);
 
   return (
     <section
-      className={search.searchClicked ? "ResultSearch" : "ResultSearch Hidden"}
+      className={appData.searchClicked ? "ResultSearch" : "ResultSearch Hidden"}
     >
       <AnimDiv className="Container-ResultSearch">
         <h1>Resultats de votre recherche </h1>
-        {search.search.length !== 0 ? (
+        {appData.search.length !== 0 ? (
           <>
             <p>
-              Titre : <span>{searchKeyword.name}</span>
+              Titre : <span>{appData.searchKeyword.name}</span>
               <br />
               Catégorie :{" "}
               {nameCategory ? (
@@ -52,14 +54,14 @@ const SearchResult = ({ search, searchKeyword }) => {
                 <span>Toutes les catégories</span>
               )}
               <br /> Region:{" "}
-              {searchKeyword.region ? (
-                <span>{searchKeyword.region}</span>
+              {appData.searchKeyword.region ? (
+                <span>{appData.searchKeyword.region}</span>
               ) : (
                 <span>Toutes les regions </span>
               )}
             </p>
             <div className="ResultSearch">
-              {search.search.map((offers) => (
+              {appData.search.map((offers) => (
                 <SearchDetail
                   key={offers.id}
                   index={offers.id}
@@ -86,15 +88,11 @@ const SearchResult = ({ search, searchKeyword }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  search: state.fetchResult,
-  searchKeyword: state.fetchResult.searchKeyword,
-});
-
 SearchResult.propTypes = {
-  search: PropTypes.shape({
+  appData: PropTypes.shape({
     search: PropTypes.arrayOf(PropTypes.object),
+    searchKeyword: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
 };
 
-export default connect(mapStateToProps)(SearchResult);
+export default SearchResult;

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import defaultImage from "../img/default-image.png";
 import styled, { keyframes } from "styled-components";
 import { ZoomIn } from "react-animations";
+import { fetchCategoryById } from "../../utils/api";
 
 const zoomAnimation = keyframes`${ZoomIn}`;
 const AnimDiv = styled.div`
@@ -28,48 +29,62 @@ const OffersItem = ({
   const [category, setCategory] = useState();
   const [show, setShow] = useState(false);
   const [unlike, setUnlike] = useState("far fa-heart unlike");
-  const [userProfile, setUserProfile] = useState({
-    firstname: "",
-    lastname: "",
-    id: "",
-  });
 
-  const getUserData = () => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/api/auth",
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
-      .then((response) => response.data)
-      .then((data) => setUserProfile(data.authData));
-  };
+  // soit directement ici soit dans un fichier à part et on la fait en async await
+  // useEffect(() => {
+  // const url = `http://localhost:3000/api/categories/${category_id}`;
+  // axios
+  //   .get(url)
+  //   .then((response) => response.data)
+  //   .then((data) => {
+  //     setCategory(data.name);
+  //   })
+  //   .catch();
+  // }, [category_id])
 
   useEffect(() => {
-    const url = `http://localhost:3000/api/categories/${category_id}`;
-    axios
-      .get(url)
-      .then((response) => response.data)
-      .then((data) => {
-        setCategory(data.name);
-      })
-      .catch();
-    // getUserData();
+    async function getCategory() {
+      const categoryName = await fetchCategoryById(category_id);
+      setCategory(categoryName);
+    }
+    getCategory();
   }, [category_id]);
 
+  // check favorite if connected
+
+  useEffect(() => {
+    if (auth.user) {
+      const url = `http://localhost:3000/api/users/${auth.user.id}/favorite`;
+      axios.get(url).then((response) => {
+        if (
+          response.data !==
+          "Les annonces favorites de l'utilisateur n'ont pas pu etre trouvées"
+        ) {
+          const usersFavorites = response.data;
+          const isFavorite = usersFavorites.find(
+            (favorites) => favorites.annonces_id === Number(index)
+          );
+          if (isFavorite) {
+            setUnlike("fa fa-heart like");
+          }
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.user]);
+
   const Likeit = () => {
-    if (userProfile.id) {
+    if (auth.user) {
       const url = `http://localhost:3000/api/favorite`;
       const favoriteData = {
-        users_id: userProfile.id,
+        users_id: auth.user.id,
         annonces_id: index,
       };
       axios
         .post(url, favoriteData)
         .then((res) => res.data)
         .catch();
-      setUnlike("far fa-heart like");
+      setUnlike("fa fa-heart like");
     } else {
       setShow(true);
     }

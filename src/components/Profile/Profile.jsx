@@ -5,19 +5,20 @@ import { authContext } from "../Contexts/AuthContext";
 import Header from "../Header/Header";
 import axios from "axios";
 import "./Profile.css";
-import { connect } from "react-redux";
 import { fetchCategorySearch, fetchUserOffer } from "../Action";
 import FavoriteResult from "../Favorite/FavoriteResult";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
+import { appContext } from "../Contexts/appContext";
 
 const zoomAnimation = keyframes`${fadeIn}`;
 const AnimDiv = styled.div`
   animation: 1s ${zoomAnimation};
 `;
 
-const Profile = ({ dispatch }) => {
+const Profile = () => {
   const { auth, setUserData } = useContext(authContext);
+  const { dispatch } = useContext(appContext);
   const [Profile, setProfile] = useState({});
   const [Offer, setOffer] = useState([]);
   const [Favorite, setFavorite] = useState([]);
@@ -164,4 +165,4 @@ Profile.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default connect()(Profile);
+export default Profile;

@@ -56,11 +56,6 @@ const AddOffer = () => {
       );
   };
 
-  useEffect(() => {
-    getCategory();
-    getUserInfo();
-  }, [getUserInfo]);
-
   const getCategory = () => {
     const url = "http://localhost:3000/api/categories/";
     axios
@@ -69,6 +64,12 @@ const AddOffer = () => {
       .then((data) => setCategory(data))
       .catch();
   };
+
+  useEffect(() => {
+    getCategory();
+    getUserInfo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

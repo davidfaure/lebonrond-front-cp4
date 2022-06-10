@@ -44,49 +44,30 @@ const OfferDetail = ({ match }) => {
     getOffer();
   }, []);
 
-  console.log(offer, "offer: ");
-  // const getUser = () => {
-  //   const url = "http://localhost:3000/api/users/";
-  //   axios
-  //     .get(url)
-  //     .then((response) => response.data)
-  //     .then((data) => setUser(data))
-  //     .catch();
-  // };
+  // check favorite
 
-  // const getCategory = () => {
-  //   const url = "http://localhost:3000/api/categories/";
-  //   axios
-  //     .get(url)
-  //     .then((response) => response.data)
-  //     .then((data) => setCategory(data))
-  //     .catch();
-  // };
-
-  // const getUserData = () => {
-  //   axios({
-  //     method: "post",
-  //     url: "http://localhost:3000/api/auth",
-  //     headers: {
-  //       Authorization: `Bearer ${auth.token}`,
-  //     },
-  //   })
-  //     .then((response) => response.data)
-  //     .then((data) => setUserProfile(data.authData));
-  // };
-
-  // const CategoryOffer = category
-  //   .filter((element) => element.id === offer.category_id)
-  //   .map((element) => element.name)[0];
-  // const CategoryUserFirstName = user
-  //   .filter((element) => element.id === offer.users_id)
-  //   .map((element) => element.firstname)[0];
-  // const CategoryUserLastName = user
-  //   .filter((element) => element.id === offer.users_id)
-  //   .map((element) => element.lastname)[0];
+  useEffect(() => {
+    if (auth.user) {
+      const url = `http://localhost:3000/api/users/${auth.user.id}/favorite`;
+      axios.get(url).then((response) => {
+        const usersFavorites = response.data;
+        if (
+          response.data !==
+          "Les annonces favorites de l'utilisateur n'ont pas pu etre trouvées"
+        ) {
+          const isFavorite = usersFavorites.find(
+            (favorites) => favorites.annonces_id === Number(id)
+          );
+          if (isFavorite) {
+            setUnlike("fa fa-heart like");
+          }
+        }
+      });
+    }
+  }, [auth.user]);
 
   const Likeit = () => {
-    if (auth.user) {
+    if (auth.user && unlike === "far fa-heart unlike") {
       const url = `http://localhost:3000/api/favorite`;
       const favoriteData = {
         users_id: auth.user.id,
@@ -96,7 +77,7 @@ const OfferDetail = ({ match }) => {
         .post(url, favoriteData)
         .then((res) => res.data)
         .catch();
-      setUnlike("far fa-heart like");
+      setUnlike("fa fa-heart like");
     } else {
       setShow(true);
     }

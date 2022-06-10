@@ -1,4 +1,4 @@
-const initialState = {
+export const initialState = {
   search: [],
   favorite: [],
   userOffer: [],
@@ -12,7 +12,7 @@ const initialState = {
   },
 };
 
-const fetchResult = (state = initialState, action) => {
+export const appReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_RESULT":
       return {
@@ -72,5 +72,3 @@ const fetchResult = (state = initialState, action) => {
       return state;
   }
 };
-
-export default fetchResult;

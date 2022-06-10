@@ -18,8 +18,6 @@ const OffersList = () => {
     getOffersList();
   }, []);
 
-  console.log(OffersList, "OFFERS");
-
   return (
     <div className="Offer">
       {OffersList.map((offers) => (
