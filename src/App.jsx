@@ -13,11 +13,13 @@ import PrivateRoute from "./components/PrivateRoute";
 import Profile from "./components/Profile/Profile";
 import UpdateOffer from "./components/Offers/UpdateOffer";
 import { AppProvider } from "./components/Contexts/appContext";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <AuthProvider>
       <AppProvider>
+        <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/offer/:id" component={OfferDetail} />

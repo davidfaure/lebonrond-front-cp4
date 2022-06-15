@@ -19,15 +19,8 @@ const OfferDetail = ({ match }) => {
   const { auth } = useContext(authContext);
   const { id } = match.params;
   const [offer, SetOffer] = useState({});
-  const [user, setUser] = useState([]);
   const [unlike, setUnlike] = useState("far fa-heart unlike");
-  const [category, setCategory] = useState([]);
   const [show, setShow] = useState(false);
-  const [userProfile, setUserProfile] = useState({
-    firstname: "",
-    lastname: "",
-    id: "",
-  });
 
   const getOffer = () => {
     const url = `http://localhost:3000/api/annonces/${id}`;
@@ -84,100 +77,97 @@ const OfferDetail = ({ match }) => {
   };
 
   return (
-    <>
-      <Header />
-      <section className="OfferDetail">
-        <AnimDiv className="Container-OfferDetail">
-          <div className="OfferDetail-Photo">
-            <img src={offer.photos} alt={offer.photos} />
-          </div>
-          <div className="OfferDetail-Title">
-            <div className="Offer-Like">
-              <h1>{offer.name}</h1>
-              <div className="heart-div" onClick={Likeit}>
-                <span className={unlike} />
-              </div>
-            </div>
-            <h3 className="prix">{offer.prix} €</h3>
-            <hr />
-          </div>
-          <div className="OfferDetail-User">
-            <h2>Vendu par :</h2>
-            <h3>
-              {offer.firstname} {offer.lastname}
-            </h3>
-            <div className="OfferButton">
-              <button className="ButtonOffer Action" type="button">
-                Faire une offre
-              </button>
-              <button className="ButtonOffer OfferBtn" type="button">
-                Contacter le vendeur
-              </button>
-            </div>
-            <hr />
-          </div>
-          <h2>Critères</h2>
-          <div className="OfferCritere">
-            <div className="OfferCatEtat">
-              <span className="fas fa-clipboard-list" />
-              <p>
-                Catégorie : <br />
-                {offer.category_name}
-              </p>
-            </div>
-            <div className="OfferCatEtat">
-              <span className="fas fa-clipboard-list" />
-              <p>
-                État : <br />
-                {offer.etat}
-              </p>
+    <section className="OfferDetail">
+      <AnimDiv className="Container-OfferDetail">
+        <div className="OfferDetail-Photo">
+          <img src={offer.photos} alt={offer.photos} />
+        </div>
+        <div className="OfferDetail-Title">
+          <div className="Offer-Like">
+            <h1>{offer.name}</h1>
+            <div className="heart-div" onClick={Likeit}>
+              <span className={unlike} />
             </div>
           </div>
-          <div>
-            <hr />
+          <h3 className="prix">{offer.prix} €</h3>
+          <hr />
+        </div>
+        <div className="OfferDetail-User">
+          <h2>Vendu par :</h2>
+          <h3>
+            {offer.firstname} {offer.lastname}
+          </h3>
+          <div className="OfferButton">
+            <button className="ButtonOffer Action" type="button">
+              Faire une offre
+            </button>
+            <button className="ButtonOffer OfferBtn" type="button">
+              Contacter le vendeur
+            </button>
           </div>
-          <div>
-            <h2>Description</h2>
-            <p>{offer.description}</p>
-            <hr />
+          <hr />
+        </div>
+        <h2>Critères</h2>
+        <div className="OfferCritere">
+          <div className="OfferCatEtat">
+            <span className="fas fa-clipboard-list" />
+            <p>
+              Catégorie : <br />
+              {offer.category_name}
+            </p>
           </div>
-          <div>
-            <h2>Localisation</h2>
-            <div className="OfferLocalisation">
-              <span className="fas fa-map-marker-alt" />
-              <p>
-                {offer.address}, {offer.cp}, {offer.city}
-                <br />
-                {offer.region}
-              </p>
-            </div>
+          <div className="OfferCatEtat">
+            <span className="fas fa-clipboard-list" />
+            <p>
+              État : <br />
+              {offer.etat}
+            </p>
           </div>
-          <div>{/* <Map /> */}</div>
-        </AnimDiv>
-        <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Lebonrond</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            Vous devez vous connecter pour ajouter une annonce à vos favoris
-          </Modal.Body>
-          <Modal.Footer>
-            <Link to="/login">
-              <Button
-                variant="primary"
-                className="OfferConBtn"
-                onClick={() => setShow(false)}
-              >
-                Se connecter
-              </Button>
-            </Link>
-            <Button variant="secondary" onClick={() => setShow(false)}>
-              Retour
+        </div>
+        <div>
+          <hr />
+        </div>
+        <div>
+          <h2>Description</h2>
+          <p>{offer.description}</p>
+          <hr />
+        </div>
+        <div>
+          <h2>Localisation</h2>
+          <div className="OfferLocalisation">
+            <span className="fas fa-map-marker-alt" />
+            <p>
+              {offer.address}, {offer.cp}, {offer.city}
+              <br />
+              {offer.region}
+            </p>
+          </div>
+        </div>
+        <div>{/* <Map /> */}</div>
+      </AnimDiv>
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Lebonrond</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Vous devez vous connecter pour ajouter une annonce à vos favoris
+        </Modal.Body>
+        <Modal.Footer>
+          <Link to="/login">
+            <Button
+              variant="primary"
+              className="OfferConBtn"
+              onClick={() => setShow(false)}
+            >
+              Se connecter
             </Button>
-          </Modal.Footer>
-        </Modal>
-      </section>
-    </>
+          </Link>
+          <Button variant="secondary" onClick={() => setShow(false)}>
+            Retour
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </section>
   );
 };
 

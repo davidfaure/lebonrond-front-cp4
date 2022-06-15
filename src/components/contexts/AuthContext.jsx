@@ -16,7 +16,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const resetState = () => {
-    console.log("LOGOUT");
     setAuth({ loading: true, token: null, user: null });
   };
 

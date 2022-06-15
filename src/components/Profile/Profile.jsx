@@ -94,70 +94,64 @@ const Profile = () => {
   console.log(Favorite, "FAVORITE");
 
   return (
-    <>
-      <Header />
-      <section className="Profile-Section">
-        <AnimDiv className="Profile-Info-Container">
-          <div className="Profile-Data-Container">
-            <h2>
-              {Profile.firstname} {Profile.lastname}
-            </h2>
-            <p>
-              <strong>Email</strong> : {Profile.email}
-            </p>
-            <p>
-              <strong>Adresse</strong> : {Profile.address}, {Profile.cp},{" "}
-              {Profile.city}, {Profile.region}
-            </p>
-            <button className="ButtonOffer ProfileBtn" disabled>
-              Modifier
+    <section className="Profile-Section">
+      <AnimDiv className="Profile-Info-Container">
+        <div className="Profile-Data-Container">
+          <h2>
+            {Profile.firstname} {Profile.lastname}
+          </h2>
+          <p>
+            <strong>Email</strong> : {Profile.email}
+          </p>
+          <p>
+            <strong>Adresse</strong> : {Profile.address}, {Profile.cp},{" "}
+            {Profile.city}, {Profile.region}
+          </p>
+          <button className="ButtonOffer ProfileBtn" disabled>
+            Modifier
+          </button>
+        </div>
+        <div className="Profile-Annonces-Container">
+          <div className="OfferNb">
+            <h2>Annonces</h2>
+            <h2>{Offer.length}</h2>
+          </div>
+          <p> Vous avez {Offer.length} annonces actives sur lebonrond</p>
+          {Offer.length !== 0 && (
+            <button className="ButtonOffer OfferBtn" onClick={getUserOffer}>
+              Consulter
             </button>
+          )}
+        </div>
+        <div className="Profile-Favoris-Container">
+          <div className="OfferNb">
+            <h2>Favoris</h2>
+            {Favorite.length === 66 ? <h2>0</h2> : <h2>{Favorite.length}</h2>}
           </div>
-          <div className="Profile-Annonces-Container">
-            <div className="OfferNb">
-              <h2>Annonces</h2>
-              <h2>{Offer.length}</h2>
-            </div>
-            <p> Vous avez {Offer.length} annonces actives sur lebonrond</p>
-            {Offer.length !== 0 && (
-              <button className="ButtonOffer OfferBtn" onClick={getUserOffer}>
-                Consulter
-              </button>
-            )}
-          </div>
-          <div className="Profile-Favoris-Container">
-            <div className="OfferNb">
-              <h2>Favoris</h2>
-              {Favorite.length === 66 ? <h2>0</h2> : <h2>{Favorite.length}</h2>}
-            </div>
-            <p>
-              {" "}
-              Vous avez {Favorite.length === 66 ? 0 : Favorite.length} annonces
-              favorites sur lebonrond
-            </p>
-            {condition && (
-              <button
-                className="ButtonOffer FavoriteBtn "
-                onClick={getFavorite}
-              >
-                Consulter
-              </button>
-            )}
-          </div>
-          <div className="Profile-Params-Container">
-            <div className="OfferParams">
-              <h2>Paramètre</h2>
-              <span className="fas fa-cog" />
-            </div>
-            <p> Vous pouvez modifier les paramètres de confidentialité</p>
-            <button className="ButtonOffer ParamsBtn" disabled>
-              Modifier
+          <p>
+            {" "}
+            Vous avez {Favorite.length === 66 ? 0 : Favorite.length} annonces
+            favorites sur lebonrond
+          </p>
+          {condition && (
+            <button className="ButtonOffer FavoriteBtn " onClick={getFavorite}>
+              Consulter
             </button>
+          )}
+        </div>
+        <div className="Profile-Params-Container">
+          <div className="OfferParams">
+            <h2>Paramètre</h2>
+            <span className="fas fa-cog" />
           </div>
-        </AnimDiv>
-        <FavoriteResult />
-      </section>
-    </>
+          <p> Vous pouvez modifier les paramètres de confidentialité</p>
+          <button className="ButtonOffer ParamsBtn" disabled>
+            Modifier
+          </button>
+        </div>
+      </AnimDiv>
+      <FavoriteResult />
+    </section>
   );
 };
 
