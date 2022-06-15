@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
@@ -8,6 +9,7 @@ import defaultImage from "../img/default-image.png";
 import styled, { keyframes } from "styled-components";
 import { zoomIn } from "react-animations";
 import { appContext } from "../Contexts/appContext";
+import { fetchCategoryById } from "../../utils/api";
 
 const zoomAnimation = keyframes`${zoomIn}`;
 const AnimDiv = styled.div`
@@ -29,17 +31,12 @@ const FavoriteDetail = ({
   const { appData } = useContext(appContext);
 
   useEffect(() => {
+    async function getCategory() {
+      const categoryName = await fetchCategoryById(category_id);
+      setCategory(categoryName);
+    }
     getCategory();
   }, []);
-
-  const getCategory = () => {
-    const url = "http://localhost:3000/api/categories/";
-    axios
-      .get(url)
-      .then((response) => response.data)
-      .then((data) => setCategory(data))
-      .catch();
-  };
 
   const deleteOffer = () => {
     setShow(false);
@@ -49,10 +46,6 @@ const FavoriteDetail = ({
       .then((response) => response.data)
       .then(() => window.location.reload());
   };
-
-  const CategoryOffer = category
-    .filter((element) => element.id === category_id)
-    .map((element) => element.name)[0];
 
   return (
     <>
@@ -68,7 +61,7 @@ const FavoriteDetail = ({
             <p className="Search-Offer-Price">{prix} €</p>
             <div className="Search-Offer-GeneralInfo">
               <div>
-                <p>{CategoryOffer}</p>
+                <p>{category}</p>
                 <p>{etat}</p>
                 <p>
                   {cp}, {city}

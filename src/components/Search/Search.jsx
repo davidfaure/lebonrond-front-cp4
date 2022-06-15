@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { Form, Col, Row, Button, Modal } from "react-bootstrap";
 import "./Search.css";
-import { connect } from "react-redux";
 import fetchResult from "../Action";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
 import { appContext } from "../Contexts/appContext";
+import { regionData } from "../../utils/region";
 
 const zoomAnimation = keyframes`${fadeIn}`;
 const AnimDiv = styled.div`
@@ -103,28 +103,11 @@ const Search = () => {
                   value={userInput.region}
                   onChange={handleChange}
                 >
-                  <option value="">--- Choisir une région ---</option>
-                  <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
-                  <option value="Occitanie">Occitanie</option>
-                  <option value="Ile-de-France">Ile-de-France</option>
-                  <option value="Provences-Alpes-Côte d'Azur">
-                    Provences-Alpes-Côte d'Azur
-                  </option>
-                  <option value="Auvergne-Rhône-Alpes">
-                    Auvergne-Rhône-Alpes
-                  </option>
-                  <option value="Bourgogne-France-Comté">
-                    Bourgogne-France-Comté
-                  </option>
-                  <option value="Grand-Est">Grand-Est</option>
-                  <option value="Hauts-de-France">Hauts-de-France</option>
-                  <option value="Normandie">Normandie</option>
-                  <option value="Bretagne">Bretagne</option>
-                  <option value="Pays de la Loire">Pays de la Loire</option>
-                  <option value="Centre-Val de Loire">
-                    Centre-Val de Loire
-                  </option>
-                  <option value="Corse">Corse</option>
+                  {regionData.map((region) => (
+                    <option value={region.value} key={region.id}>
+                      {region.label}
+                    </option>
+                  ))}
                 </Form.Control>
               </Form.Group>
             </Col>

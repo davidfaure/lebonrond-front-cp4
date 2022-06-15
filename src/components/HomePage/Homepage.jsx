@@ -1,6 +1,5 @@
 import React from "react";
 import "./HomePage.css";
-import Header from "../Header/Header";
 import OffersList from "../Offers/OffersList";
 import Search from "../Search/Search";
 import SearchResult from "../Search/SearchResult";

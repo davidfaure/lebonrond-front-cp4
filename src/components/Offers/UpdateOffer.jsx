@@ -1,13 +1,14 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useReducer, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Form, Modal, Col, Button } from "react-bootstrap";
-import Header from "../Header/Header";
 import defaultImage from "../img/default-image.png";
 import OfferCategoryList from "./OfferCategoryList";
 import styled, { keyframes } from "styled-components";
 import { fadeIn } from "react-animations";
+import { regionData, etatData } from "../../utils/region";
 
 const zoomAnimation = keyframes`${fadeIn}`;
 const AnimDiv = styled.div`
@@ -42,7 +43,7 @@ const UpdateOffer = ({ match }) => {
 
   useEffect(() => {
     getOfferInfo();
-  }, [getOfferInfo]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -108,12 +109,11 @@ const UpdateOffer = ({ match }) => {
                 onChange={handleChange}
                 value={userInput.etat}
               >
-                <option>--- État du produit ---</option>
-                <option value="État neuf">État neuf</option>
-                <option value="Très bon état">Très bon état</option>
-                <option value="Bon état">Bon état</option>
-                <option value="État satisfaisant">État satisfaisant</option>
-                <option value="Pour pièces">Pour pièces</option>
+                {etatData.map((etat) => (
+                  <option value={etat.value} key={etat.id}>
+                    {etat.label}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="prix">
@@ -192,26 +192,11 @@ const UpdateOffer = ({ match }) => {
                 onChange={handleChange}
                 value={userInput.region}
               >
-                <option>--- Choisr une région ---</option>
-                <option value="Nouvelle-Aquitaine">Nouvelle-Aquitaine</option>
-                <option value="Occitanie">Occitanie</option>
-                <option value="Ile-de-France">Ile-de-France</option>
-                <option value="Provences-Alpes-Côte d'Azur">
-                  Provences-Alpes-Côte d'Azur
-                </option>
-                <option value="Auvergne-Rhône-Alpes">
-                  Auvergne-Rhône-Alpes
-                </option>
-                <option value="Bourgogne-France-Comté">
-                  Bourgogne-France-Comté
-                </option>
-                <option value="Grand-Est">Grand-Est</option>
-                <option value="Hauts-de-France">Hauts-de-France</option>
-                <option value="Normandie">Normandie</option>
-                <option value="Bretagne">Bretagne</option>
-                <option value="Pays de la Loire">Pays de la Loire</option>
-                <option value="Centre-Val de Loire">Centre-Val de Loire</option>
-                <option value="Corse">Corse</option>
+                {regionData.map((region) => (
+                  <option value={region.value} key={region.id}>
+                    {region.label}
+                  </option>
+                ))}
               </Form.Control>
             </Form.Group>
             <div className="text-center signupButton">

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
@@ -15,26 +16,26 @@ const SearchResult = () => {
   const [category, setCategory] = useState([]);
 
   const { appData } = useContext(appContext);
-
-  console.log(appData, "APP DATA");
-
   useEffect(() => {
     getCategory();
-  }, [appData]);
+  }, [appData.searchKeyword]);
 
   const getCategory = () => {
-    const url = "http://localhost:3000/api/categories/";
+    const url = `http://localhost:3000/api/categories/${Number(
+      appData.searchKeyword.category
+    )}`;
     axios
       .get(url)
-      .then((response) => response.data)
-      .then((data) => setCategory(data))
+      .then((response) => {
+        console.log(response);
+        if (response.status === 204) {
+          setCategory("Toutes les catégories");
+        } else {
+          setCategory(response.data.name);
+        }
+      })
       .catch();
   };
-
-  // console.log(searchKeyword);
-  const nameCategory = category
-    .filter((element) => element.id === Number(appData.searchKeyword.category))
-    .map((element) => element.name)[0];
 
   return (
     <section
@@ -47,12 +48,7 @@ const SearchResult = () => {
             <p>
               Titre : <span>{appData.searchKeyword.name}</span>
               <br />
-              Catégorie :{" "}
-              {nameCategory ? (
-                <span>{nameCategory}</span>
-              ) : (
-                <span>Toutes les catégories</span>
-              )}
+              Catégorie : <span>{category}</span>
               <br /> Region:{" "}
               {appData.searchKeyword.region ? (
                 <span>{appData.searchKeyword.region}</span>

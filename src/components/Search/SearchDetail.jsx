@@ -8,6 +8,7 @@ import { authContext } from "../Contexts/AuthContext";
 import defaultImage from "../img/default-image.png";
 import styled, { keyframes } from "styled-components";
 import { zoomIn } from "react-animations";
+import { fetchCategoryById } from "../../utils/api";
 
 const zoomAnimation = keyframes`${zoomIn}`;
 const AnimDiv = styled.div`
@@ -26,60 +27,54 @@ const SearchDetail = ({
 }) => {
   const { auth } = useContext(authContext);
   const [category, setCategory] = useState([]);
-  const [unlike, setUnlike] = useState("far fa-heart unlike");
+  const [unlike, setUnlike] = useState("fa fa-heart unlike");
   const [show, setShow] = useState(false);
-  const [userProfile, setUserProfile] = useState({
-    firstname: "",
-    lastname: "",
-    id: "",
-  });
-
-  const getCategory = () => {
-    const url = "http://localhost:3000/api/categories/";
-    axios
-      .get(url)
-      .then((response) => response.data)
-      .then((data) => setCategory(data))
-      .catch();
-  };
-
-  const getUserData = () => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/api/auth",
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
-      .then((response) => response.data)
-      .then((data) => setUserProfile(data.authData));
-  };
 
   useEffect(() => {
-    getUserData();
+    async function getCategory() {
+      const categoryName = await fetchCategoryById(index);
+      setCategory(categoryName);
+    }
     getCategory();
   }, []);
 
   const Likeit = () => {
-    if (userProfile.id) {
+    if (auth.user.id) {
       const url = `http://localhost:3000/api/favorite`;
       const favoriteData = {
-        users_id: userProfile.id,
+        users_id: auth.user.id,
         annonces_id: index,
       };
       axios
         .post(url, favoriteData)
         .then((res) => res.data)
         .catch();
-      setUnlike("far fa-heart like");
+      setUnlike("fa fa-heart like");
     } else {
       setShow(true);
     }
   };
 
-  const CategoryOffer = category
-    .filter((element) => element.id === category_id)
-    .map((element) => element.name)[0];
+  useEffect(() => {
+    if (auth.user) {
+      const url = `http://localhost:3000/api/users/${auth.user.id}/favorite`;
+      axios.get(url).then((response) => {
+        if (
+          response.data !==
+          "Les annonces favorites de l'utilisateur n'ont pas pu etre trouvées"
+        ) {
+          const usersFavorites = response.data;
+          const isFavorite = usersFavorites.find(
+            (favorites) => favorites.annonces_id === Number(index)
+          );
+          if (isFavorite) {
+            setUnlike("fa fa-heart like");
+          }
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auth.user]);
 
   return (
     <>
@@ -99,7 +94,7 @@ const SearchDetail = ({
           <div>
             <p className="Search-Offer-Price">{prix} €</p>
             <div className="ReSearch-Offer-GeneralInfo">
-              <p>{CategoryOffer}</p>
+              <p>{category}</p>
               <p>{etat}</p>
               <p>
                 {cp}, {city}

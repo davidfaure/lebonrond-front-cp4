@@ -1,5 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../App.css";
 import "./Header.css";
@@ -7,24 +6,6 @@ import { authContext } from "../Contexts/AuthContext";
 
 const Header = () => {
   const { resetState, auth } = useContext(authContext);
-  const [Profile, setProfile] = useState({
-    firstname: "",
-    lastname: "",
-  });
-
-  useEffect(() => {
-    axios({
-      method: "post",
-      url: "http://localhost:3000/api/auth",
-      headers: {
-        Authorization: `Bearer ${auth.token}`,
-      },
-    })
-      .then((response) => response.data)
-      .then((data) => {
-        setProfile(data.authData);
-      });
-  }, [auth.token]);
 
   const Logout = () => {
     resetState();
@@ -41,7 +22,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="Admin-brand col-md-2">
-          <Link to={"/login"}>
+          <Link to={auth.token ? "/add-offer" : "/login"}>
             <button className="ButtonAction Action" type="button">
               Déposer une annonce
             </button>
@@ -49,7 +30,7 @@ const Header = () => {
         </div>
         <div className="Admin-board Flex">
           <div className="Admin-name">
-            {Profile.firstname === "" ? (
+            {auth.user === null ? (
               <div className="Admin-name-disc">
                 <p>Bonjour invité</p>
                 <Link
@@ -65,7 +46,7 @@ const Header = () => {
               <p>
                 Bonjour{" "}
                 <Link to="/profile" style={{ textDecoration: "none" }}>
-                  {Profile.firstname} {Profile.lastname}
+                  {auth.user.firstname} {auth.user.lastname}
                 </Link>
               </p>
             )}

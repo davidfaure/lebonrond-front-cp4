@@ -6,12 +6,10 @@ export const authContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({ loading: true, token: null, user: null });
   const setAuthData = (data) => {
-    console.log(data);
     setAuth({ ...auth, loading: false, token: data });
   };
 
   const setUserData = (userData) => {
-    console.log(userData);
     setAuth({ ...auth, loading: false, user: userData });
   };
 
