@@ -27,7 +27,6 @@ const SearchResult = () => {
     axios
       .get(url)
       .then((response) => {
-        console.log(response);
         if (response.status === 204) {
           setCategory("Toutes les catégories");
         } else {
@@ -88,7 +87,11 @@ SearchResult.propTypes = {
   appData: PropTypes.shape({
     search: PropTypes.arrayOf(PropTypes.object),
     searchKeyword: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
+  }),
+};
+
+SearchResult.defaultProps = {
+  appData: undefined,
 };
 
 export default SearchResult;

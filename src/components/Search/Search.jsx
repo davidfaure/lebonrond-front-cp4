@@ -136,7 +136,11 @@ const Search = () => {
 };
 
 Search.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
+};
+
+Search.defaultProps = {
+  dispatch: undefined,
 };
 
 export default Search;

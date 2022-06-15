@@ -35,8 +35,6 @@ const AddOffer = () => {
     }
   );
 
-  console.log(auth.user, "AUTH");
-
   const getCategory = () => {
     const url = "http://localhost:3000/api/categories/";
     axios

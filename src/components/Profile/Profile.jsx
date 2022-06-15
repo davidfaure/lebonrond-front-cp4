@@ -162,7 +162,11 @@ const Profile = () => {
 };
 
 Profile.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatch: PropTypes.func,
+};
+
+Profile.defaultProps = {
+  dispatch: undefined,
 };
 
 export default Profile;

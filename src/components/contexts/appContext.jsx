@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { createContext, useReducer } from "react";
 import { appReducer, initialState } from "../Reducer/appReducer";
 
@@ -12,8 +11,4 @@ export const AppProvider = ({ children }) => {
       {children}
     </appContext.Provider>
   );
-};
-
-AppProvider.propTypes = {
-  children: PropTypes.object.isRequired,
 };

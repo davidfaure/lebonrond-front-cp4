@@ -119,7 +119,11 @@ FavoriteDetail.propTypes = {
   etat: PropTypes.string.isRequired,
   appData: PropTypes.shape({
     userOfferClicked: PropTypes.bool,
-  }).isRequired,
+  }),
+};
+
+FavoriteDetail.defaultProps = {
+  appData: undefined,
 };
 
 export default FavoriteDetail;

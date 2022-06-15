@@ -48,8 +48,12 @@ MyOffer.propTypes = {
     favoriteClicked: PropTypes.bool,
     userOffer: PropTypes.arrayOf(PropTypes.object),
     userOfferClicked: PropTypes.bool,
-  }).isRequired,
+  }),
   whichOffer: PropTypes.string.isRequired,
+};
+
+MyOffer.defaultProps = {
+  appData: undefined,
 };
 
 export default MyOffer;

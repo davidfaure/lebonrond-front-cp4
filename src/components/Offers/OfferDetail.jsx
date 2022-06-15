@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Header from "../Header/Header";
 import axios from "axios";
 import "./Offers.css";
 import { authContext } from "../Contexts/AuthContext";
